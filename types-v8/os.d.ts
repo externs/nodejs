@@ -1,4 +1,4 @@
-///<reference path="index.d.ts"/>
+/// <reference path="./nodejs.d.ts"/>
 
 declare module "os" {
   export interface CpuInfo {
