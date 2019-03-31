@@ -1,0 +1,46 @@
+{
+  "name": "@depack/externs",
+  "version": "0.0.0-pre",
+  "description": "The Externs For Node.JS.",
+  "main": "build/index.js",
+  "module": "src/index.js",
+  "scripts": {
+    "t": "zoroaster -a",
+    "test": "yarn t test/spec test/mask",
+    "spec": "yarn t test/spec",
+    "mask": "yarn t test/mask",
+    "test-build": "ALAMODE_ENV=test-build yarn test",
+    "lint": "eslint .",
+    "doc": "NODE_DEBUG=doc doc documentary -o README.md",
+    "b": "alamode src -o build -s",
+    "d": "yarn-s d1",
+    "d1": "NODE_DEBUG=doc doc src/index.js -g",
+    "build": "yarn-s d b doc",
+    "e": "alanode"
+  },
+  "files": [
+    "build",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dpck/externs.git"
+  },
+  "keywords": [
+    "externs",
+    "depack"
+  ],
+  "author": "Anton <anton@adc.sh>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dpck/externs/issues"
+  },
+  "homepage": "https://github.com/dpck/externs#readme",
+  "devDependencies": {
+    "alamode": "1.9.0",
+    "documentary": "1.23.2",
+    "eslint-config-artdeco": "1.0.1",
+    "yarn-s": "1.1.0",
+    "zoroaster": "3.11.2"
+  }
+}
