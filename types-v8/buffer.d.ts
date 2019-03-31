@@ -1,5 +1,8 @@
 /// <reference path="./global.d.ts"/>
 
+// Buffer class
+type BufferEncoding = "ascii" | "utf8" | "utf16le" | "ucs2" | "base64" | "latin1" | "binary" | "hex";
+
 interface Buffer extends NodeBuffer { }
 /**
 * @deprecated

@@ -12,22 +12,22 @@ var events = {};
  * @constructor
  * @struct
  */
-events.internal = function() {};
+events = function() {};
 /**
- * @extends {events.internal}
+ * @extends {events}
  * @constructor
  * @struct
  */
-events.internal.EventEmitter = function() {};
+events.EventEmitter = function() {};
 /** @type {number} */
-events.internal.EventEmitter.defaultMaxListeners;
+events.EventEmitter.defaultMaxListeners;
 
 /**
- * @param {!events.internal.EventEmitter} emitter
+ * @param {!events.EventEmitter} emitter
  * @param {(string|symbol)} event
  * @return {number}
  */
-events.internal.EventEmitter.listenerCount = function(emitter, event) {};
+events.EventEmitter.listenerCount = function(emitter, event) {};
 
 /**
  * @template THIS
@@ -36,7 +36,7 @@ events.internal.EventEmitter.listenerCount = function(emitter, event) {};
  * @param {function(...?): void} listener
  * @return {THIS}
  */
-events.internal.EventEmitter.prototype.addListener = function(event, listener) {};
+events.EventEmitter.prototype.addListener = function(event, listener) {};
 
 /**
  * @template THIS
@@ -45,7 +45,7 @@ events.internal.EventEmitter.prototype.addListener = function(event, listener) {
  * @param {function(...?): void} listener
  * @return {THIS}
  */
-events.internal.EventEmitter.prototype.on = function(event, listener) {};
+events.EventEmitter.prototype.on = function(event, listener) {};
 
 /**
  * @template THIS
@@ -54,7 +54,7 @@ events.internal.EventEmitter.prototype.on = function(event, listener) {};
  * @param {function(...?): void} listener
  * @return {THIS}
  */
-events.internal.EventEmitter.prototype.once = function(event, listener) {};
+events.EventEmitter.prototype.once = function(event, listener) {};
 
 /**
  * @template THIS
@@ -63,7 +63,7 @@ events.internal.EventEmitter.prototype.once = function(event, listener) {};
  * @param {function(...?): void} listener
  * @return {THIS}
  */
-events.internal.EventEmitter.prototype.prependListener = function(event, listener) {};
+events.EventEmitter.prototype.prependListener = function(event, listener) {};
 
 /**
  * @template THIS
@@ -72,7 +72,7 @@ events.internal.EventEmitter.prototype.prependListener = function(event, listene
  * @param {function(...?): void} listener
  * @return {THIS}
  */
-events.internal.EventEmitter.prototype.prependOnceListener = function(event, listener) {};
+events.EventEmitter.prototype.prependOnceListener = function(event, listener) {};
 
 /**
  * @template THIS
@@ -81,7 +81,7 @@ events.internal.EventEmitter.prototype.prependOnceListener = function(event, lis
  * @param {function(...?): void} listener
  * @return {THIS}
  */
-events.internal.EventEmitter.prototype.removeListener = function(event, listener) {};
+events.EventEmitter.prototype.removeListener = function(event, listener) {};
 
 /**
  * @template THIS
@@ -89,7 +89,7 @@ events.internal.EventEmitter.prototype.removeListener = function(event, listener
  * @param {(string|symbol)=} event
  * @return {THIS}
  */
-events.internal.EventEmitter.prototype.removeAllListeners = function(event) {};
+events.EventEmitter.prototype.removeAllListeners = function(event) {};
 
 /**
  * @template THIS
@@ -97,33 +97,33 @@ events.internal.EventEmitter.prototype.removeAllListeners = function(event) {};
  * @param {number} n
  * @return {THIS}
  */
-events.internal.EventEmitter.prototype.setMaxListeners = function(n) {};
+events.EventEmitter.prototype.setMaxListeners = function(n) {};
 
 /**
  * @return {number}
  */
-events.internal.EventEmitter.prototype.getMaxListeners = function() {};
+events.EventEmitter.prototype.getMaxListeners = function() {};
 
 /**
  * @param {(string|symbol)} event
  * @return {!Array<!Function>}
  */
-events.internal.EventEmitter.prototype.listeners = function(event) {};
+events.EventEmitter.prototype.listeners = function(event) {};
 
 /**
  * @param {(string|symbol)} event
  * @param {...?} args
  * @return {boolean}
  */
-events.internal.EventEmitter.prototype.emit = function(event, args) {};
+events.EventEmitter.prototype.emit = function(event, args) {};
 
 /**
  * @return {!Array<(string|symbol)>}
  */
-events.internal.EventEmitter.prototype.eventNames = function() {};
+events.EventEmitter.prototype.eventNames = function() {};
 
 /**
  * @param {(string|symbol)} type
  * @return {number}
  */
-events.internal.EventEmitter.prototype.listenerCount = function(type) {};
+events.EventEmitter.prototype.listenerCount = function(type) {};
