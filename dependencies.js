@@ -1,5 +1,6 @@
 module.exports = {
   os: [], // it references NodeJS.platform however it's resolved to a string
+  global: ['buffer', 'nodejs'],
   url: ['querystring', 'global'],
   vm: ['buffer'], // ScriptOptions.cachedData: Buffer
   buffer: ['global'], // global.IterableIterator
