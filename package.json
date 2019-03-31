@@ -16,7 +16,8 @@
     "d": "yarn-s d1",
     "d1": "NODE_DEBUG=doc doc src/index.js -g",
     "build": "yarn-s d b doc",
-    "e": "alanode"
+    "e": "alanode",
+    "os": "tsickle --externs=v8/os.js"
   },
   "files": [
     "build",
@@ -40,6 +41,8 @@
     "alamode": "1.9.0",
     "documentary": "1.23.2",
     "eslint-config-artdeco": "1.0.1",
+    "tsickle": "0.34.3",
+    "typescript": "3.4.1",
     "yarn-s": "1.1.0",
     "zoroaster": "3.11.2"
   }
