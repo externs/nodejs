@@ -33,7 +33,11 @@
     "tls": "tsickle --externs=v8/tls.js",
     "http": "tsickle --externs=v8/http.js",
     "https": "tsickle --externs=v8/https.js",
-    "http2": "tsickle --externs=v8/http2.js"
+    "http2": "tsickle --externs=v8/http2.js",
+    "async_hooks": "tsickle --externs=v8/async_hooks.js",
+    "zlib": "tsickle --externs=v8/zlib.js",
+    "child_process": "tsickle --externs=v8/child_process.js",
+    "path": "tsickle --externs=v8/path.js"
   },
   "files": [
     "build",
