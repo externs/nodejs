@@ -180,7 +180,6 @@ declare var SlowBuffer: {
 
 // Buffer class
 type BufferEncoding = "ascii" | "utf8" | "utf16le" | "ucs2" | "base64" | "latin1" | "binary" | "hex";
-interface Buffer extends NodeBuffer { }
 
 /**
 * Raw data is stored in instances of the Buffer class.
@@ -829,65 +828,6 @@ declare namespace NodeJS {
 
       constructor(id: string, parent?: Module);
   }
-}
-
-/**
-* @deprecated
-*/
-interface NodeBuffer extends Uint8Array {
-  write(string: string, offset?: number, length?: number, encoding?: string): number;
-  toString(encoding?: string, start?: number, end?: number): string;
-  toJSON(): { type: 'Buffer', data: any[] };
-  equals(otherBuffer: Buffer): boolean;
-  compare(otherBuffer: Buffer, targetStart?: number, targetEnd?: number, sourceStart?: number, sourceEnd?: number): number;
-  copy(targetBuffer: Buffer, targetStart?: number, sourceStart?: number, sourceEnd?: number): number;
-  slice(start?: number, end?: number): Buffer;
-  writeUIntLE(value: number, offset: number, byteLength: number, noAssert?: boolean): number;
-  writeUIntBE(value: number, offset: number, byteLength: number, noAssert?: boolean): number;
-  writeIntLE(value: number, offset: number, byteLength: number, noAssert?: boolean): number;
-  writeIntBE(value: number, offset: number, byteLength: number, noAssert?: boolean): number;
-  readUIntLE(offset: number, byteLength: number, noAssert?: boolean): number;
-  readUIntBE(offset: number, byteLength: number, noAssert?: boolean): number;
-  readIntLE(offset: number, byteLength: number, noAssert?: boolean): number;
-  readIntBE(offset: number, byteLength: number, noAssert?: boolean): number;
-  readUInt8(offset: number, noAssert?: boolean): number;
-  readUInt16LE(offset: number, noAssert?: boolean): number;
-  readUInt16BE(offset: number, noAssert?: boolean): number;
-  readUInt32LE(offset: number, noAssert?: boolean): number;
-  readUInt32BE(offset: number, noAssert?: boolean): number;
-  readInt8(offset: number, noAssert?: boolean): number;
-  readInt16LE(offset: number, noAssert?: boolean): number;
-  readInt16BE(offset: number, noAssert?: boolean): number;
-  readInt32LE(offset: number, noAssert?: boolean): number;
-  readInt32BE(offset: number, noAssert?: boolean): number;
-  readFloatLE(offset: number, noAssert?: boolean): number;
-  readFloatBE(offset: number, noAssert?: boolean): number;
-  readDoubleLE(offset: number, noAssert?: boolean): number;
-  readDoubleBE(offset: number, noAssert?: boolean): number;
-  swap16(): Buffer;
-  swap32(): Buffer;
-  swap64(): Buffer;
-  writeUInt8(value: number, offset: number, noAssert?: boolean): number;
-  writeUInt16LE(value: number, offset: number, noAssert?: boolean): number;
-  writeUInt16BE(value: number, offset: number, noAssert?: boolean): number;
-  writeUInt32LE(value: number, offset: number, noAssert?: boolean): number;
-  writeUInt32BE(value: number, offset: number, noAssert?: boolean): number;
-  writeInt8(value: number, offset: number, noAssert?: boolean): number;
-  writeInt16LE(value: number, offset: number, noAssert?: boolean): number;
-  writeInt16BE(value: number, offset: number, noAssert?: boolean): number;
-  writeInt32LE(value: number, offset: number, noAssert?: boolean): number;
-  writeInt32BE(value: number, offset: number, noAssert?: boolean): number;
-  writeFloatLE(value: number, offset: number, noAssert?: boolean): number;
-  writeFloatBE(value: number, offset: number, noAssert?: boolean): number;
-  writeDoubleLE(value: number, offset: number, noAssert?: boolean): number;
-  writeDoubleBE(value: number, offset: number, noAssert?: boolean): number;
-  fill(value: any, offset?: number, end?: number): this;
-  indexOf(value: string | number | Buffer, byteOffset?: number, encoding?: string): number;
-  lastIndexOf(value: string | number | Buffer, byteOffset?: number, encoding?: string): number;
-  entries(): IterableIterator<[number, number]>;
-  includes(value: string | number | Buffer, byteOffset?: number, encoding?: string): boolean;
-  keys(): IterableIterator<number>;
-  values(): IterableIterator<number>;
 }
 
 /************************************************
@@ -1806,38 +1746,6 @@ declare module "readline" {
   export function moveCursor(stream: NodeJS.WritableStream, dx: number | string, dy: number | string): void;
   export function clearLine(stream: NodeJS.WritableStream, dir: number): void;
   export function clearScreenDown(stream: NodeJS.WritableStream): void;
-}
-
-declare module "vm" {
-  export interface Context { }
-  export interface ScriptOptions {
-      filename?: string;
-      lineOffset?: number;
-      columnOffset?: number;
-      displayErrors?: boolean;
-      timeout?: number;
-      cachedData?: Buffer;
-      produceCachedData?: boolean;
-  }
-  export interface RunningScriptOptions {
-      filename?: string;
-      lineOffset?: number;
-      columnOffset?: number;
-      displayErrors?: boolean;
-      timeout?: number;
-  }
-  export class Script {
-      constructor(code: string, options?: ScriptOptions);
-      runInContext(contextifiedSandbox: Context, options?: RunningScriptOptions): any;
-      runInNewContext(sandbox?: Context, options?: RunningScriptOptions): any;
-      runInThisContext(options?: RunningScriptOptions): any;
-  }
-  export function createContext(sandbox?: Context): Context;
-  export function isContext(sandbox: Context): boolean;
-  export function runInContext(code: string, contextifiedSandbox: Context, options?: RunningScriptOptions | string): any;
-  export function runInDebugContext(code: string): any;
-  export function runInNewContext(code: string, sandbox?: Context, options?: RunningScriptOptions | string): any;
-  export function runInThisContext(code: string, options?: RunningScriptOptions | string): any;
 }
 
 declare module "child_process" {
