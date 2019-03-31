@@ -12,7 +12,7 @@ var stream = {};
  * @constructor
  * @struct
  */
-stream.internal = function() {};
+stream = function() {};
 
 /**
  * @template T
@@ -20,53 +20,53 @@ stream.internal = function() {};
  * @param {{end: boolean}=} options
  * @return {stream.T}
  */
-stream.internal.prototype.pipe = function(destination, options) {};
+stream.prototype.pipe = function(destination, options) {};
 /**
- * @extends {stream.internal}
+ * @extends {stream}
  * @constructor
  * @struct
  */
-stream.internal.Stream = function() {};
+stream.Stream = function() {};
 /**
  * @record
  * @struct
  */
-stream.internal.ReadableOptions = function() {};
+stream.ReadableOptions = function() {};
 /** @type {number} */
-stream.internal.ReadableOptions.prototype.highWaterMark;
+stream.ReadableOptions.prototype.highWaterMark;
 /** @type {string} */
-stream.internal.ReadableOptions.prototype.encoding;
+stream.ReadableOptions.prototype.encoding;
 /** @type {boolean} */
-stream.internal.ReadableOptions.prototype.objectMode;
-/** @type {function(this: (!stream.internal.Readable), number=): ?} */
-stream.internal.ReadableOptions.prototype.read;
+stream.ReadableOptions.prototype.objectMode;
+/** @type {function(this: (!stream.Readable), number=): ?} */
+stream.ReadableOptions.prototype.read;
 /** @type {function(!Error, function(!Error=): void): void} */
-stream.internal.ReadableOptions.prototype.destroy;
+stream.ReadableOptions.prototype.destroy;
 
 /**
- * @extends {stream.internal.Stream}
+ * @extends {stream.Stream}
  * @implements {NodeJS.ReadableStream}
  * @constructor
  * @struct
- * @param {!stream.internal.ReadableOptions=} opts
+ * @param {!stream.ReadableOptions=} opts
  */
-stream.internal.Readable = function(opts) {};
+stream.Readable = function(opts) {};
 /** @type {boolean} */
-stream.internal.Readable.prototype.readable;
+stream.Readable.prototype.readable;
 /** @type {number} */
-stream.internal.Readable.prototype.readableHighWaterMark;
+stream.Readable.prototype.readableHighWaterMark;
 
 /**
  * @param {number} size
  * @return {void}
  */
-stream.internal.Readable.prototype._read = function(size) {};
+stream.Readable.prototype._read = function(size) {};
 
 /**
  * @param {number=} size
  * @return {?}
  */
-stream.internal.Readable.prototype.read = function(size) {};
+stream.Readable.prototype.read = function(size) {};
 
 /**
  * @template THIS
@@ -74,26 +74,26 @@ stream.internal.Readable.prototype.read = function(size) {};
  * @param {string} encoding
  * @return {THIS}
  */
-stream.internal.Readable.prototype.setEncoding = function(encoding) {};
+stream.Readable.prototype.setEncoding = function(encoding) {};
 
 /**
  * @template THIS
  * @this {THIS}
  * @return {THIS}
  */
-stream.internal.Readable.prototype.pause = function() {};
+stream.Readable.prototype.pause = function() {};
 
 /**
  * @template THIS
  * @this {THIS}
  * @return {THIS}
  */
-stream.internal.Readable.prototype.resume = function() {};
+stream.Readable.prototype.resume = function() {};
 
 /**
  * @return {boolean}
  */
-stream.internal.Readable.prototype.isPaused = function() {};
+stream.Readable.prototype.isPaused = function() {};
 
 /**
  * @template THIS,T
@@ -101,13 +101,13 @@ stream.internal.Readable.prototype.isPaused = function() {};
  * @param {stream.T=} destination
  * @return {THIS}
  */
-stream.internal.Readable.prototype.unpipe = function(destination) {};
+stream.Readable.prototype.unpipe = function(destination) {};
 
 /**
  * @param {?} chunk
  * @return {void}
  */
-stream.internal.Readable.prototype.unshift = function(chunk) {};
+stream.Readable.prototype.unshift = function(chunk) {};
 
 /**
  * @template THIS
@@ -115,27 +115,27 @@ stream.internal.Readable.prototype.unshift = function(chunk) {};
  * @param {!NodeJS.ReadableStream} oldStream
  * @return {THIS}
  */
-stream.internal.Readable.prototype.wrap = function(oldStream) {};
+stream.Readable.prototype.wrap = function(oldStream) {};
 
 /**
  * @param {?} chunk
  * @param {string=} encoding
  * @return {boolean}
  */
-stream.internal.Readable.prototype.push = function(chunk, encoding) {};
+stream.Readable.prototype.push = function(chunk, encoding) {};
 
 /**
  * @param {!Error} error
  * @param {function(!Error=): void} callback
  * @return {void}
  */
-stream.internal.Readable.prototype._destroy = function(error, callback) {};
+stream.Readable.prototype._destroy = function(error, callback) {};
 
 /**
  * @param {!Error=} error
  * @return {void}
  */
-stream.internal.Readable.prototype.destroy = function(error) {};
+stream.Readable.prototype.destroy = function(error) {};
 
 /**
  * Event emitter
@@ -151,14 +151,14 @@ stream.internal.Readable.prototype.destroy = function(error) {};
  * @param {function(...?): void|function(): void|function((string|!Buffer)): void|function(!Error): void} listener
  * @return {THIS}
  */
-stream.internal.Readable.prototype.addListener = function(event, listener) {};
+stream.Readable.prototype.addListener = function(event, listener) {};
 
 /**
  * @param {(string|symbol)|string} event
  * @param {...?|(string|!Buffer)|!Error} args_or_chunk_or_err
  * @return {boolean}
  */
-stream.internal.Readable.prototype.emit = function(event, args_or_chunk_or_err) {};
+stream.Readable.prototype.emit = function(event, args_or_chunk_or_err) {};
 
 /**
  * @template THIS
@@ -167,7 +167,7 @@ stream.internal.Readable.prototype.emit = function(event, args_or_chunk_or_err) 
  * @param {function(...?): void|function(): void|function((string|!Buffer)): void|function(!Error): void} listener
  * @return {THIS}
  */
-stream.internal.Readable.prototype.on = function(event, listener) {};
+stream.Readable.prototype.on = function(event, listener) {};
 
 /**
  * @template THIS
@@ -176,7 +176,7 @@ stream.internal.Readable.prototype.on = function(event, listener) {};
  * @param {function(...?): void|function(): void|function((string|!Buffer)): void|function(!Error): void} listener
  * @return {THIS}
  */
-stream.internal.Readable.prototype.once = function(event, listener) {};
+stream.Readable.prototype.once = function(event, listener) {};
 
 /**
  * @template THIS
@@ -185,7 +185,7 @@ stream.internal.Readable.prototype.once = function(event, listener) {};
  * @param {function(...?): void|function(): void|function((string|!Buffer)): void|function(!Error): void} listener
  * @return {THIS}
  */
-stream.internal.Readable.prototype.prependListener = function(event, listener) {};
+stream.Readable.prototype.prependListener = function(event, listener) {};
 
 /**
  * @template THIS
@@ -194,7 +194,7 @@ stream.internal.Readable.prototype.prependListener = function(event, listener) {
  * @param {function(...?): void|function(): void|function((string|!Buffer)): void|function(!Error): void} listener
  * @return {THIS}
  */
-stream.internal.Readable.prototype.prependOnceListener = function(event, listener) {};
+stream.Readable.prototype.prependOnceListener = function(event, listener) {};
 
 /**
  * @template THIS
@@ -203,39 +203,39 @@ stream.internal.Readable.prototype.prependOnceListener = function(event, listene
  * @param {function(...?): void|function(): void|function((string|!Buffer)): void|function(!Error): void} listener
  * @return {THIS}
  */
-stream.internal.Readable.prototype.removeListener = function(event, listener) {};
+stream.Readable.prototype.removeListener = function(event, listener) {};
 /**
  * @record
  * @struct
  */
-stream.internal.WritableOptions = function() {};
+stream.WritableOptions = function() {};
 /** @type {number} */
-stream.internal.WritableOptions.prototype.highWaterMark;
+stream.WritableOptions.prototype.highWaterMark;
 /** @type {boolean} */
-stream.internal.WritableOptions.prototype.decodeStrings;
+stream.WritableOptions.prototype.decodeStrings;
 /** @type {boolean} */
-stream.internal.WritableOptions.prototype.objectMode;
+stream.WritableOptions.prototype.objectMode;
 /** @type {function(?, string, !Function): ?} */
-stream.internal.WritableOptions.prototype.write;
+stream.WritableOptions.prototype.write;
 /** @type {function(!Array<{chunk: ?, encoding: string}>, !Function): ?} */
-stream.internal.WritableOptions.prototype.writev;
+stream.WritableOptions.prototype.writev;
 /** @type {function(!Error, function(!Error=): void): void} */
-stream.internal.WritableOptions.prototype.destroy;
+stream.WritableOptions.prototype.destroy;
 /** @type {function(function(!Error=): void): void} */
-stream.internal.WritableOptions.prototype.final;
+stream.WritableOptions.prototype.final;
 
 /**
- * @extends {stream.internal.Stream}
+ * @extends {stream.Stream}
  * @implements {NodeJS.WritableStream}
  * @constructor
  * @struct
- * @param {!stream.internal.WritableOptions=} opts
+ * @param {!stream.WritableOptions=} opts
  */
-stream.internal.Writable = function(opts) {};
+stream.Writable = function(opts) {};
 /** @type {boolean} */
-stream.internal.Writable.prototype.writable;
+stream.Writable.prototype.writable;
 /** @type {number} */
-stream.internal.Writable.prototype.writableHighWaterMark;
+stream.Writable.prototype.writableHighWaterMark;
 
 /**
  * @param {?} chunk
@@ -243,27 +243,27 @@ stream.internal.Writable.prototype.writableHighWaterMark;
  * @param {function(!Error=): void} callback
  * @return {void}
  */
-stream.internal.Writable.prototype._write = function(chunk, encoding, callback) {};
+stream.Writable.prototype._write = function(chunk, encoding, callback) {};
 
 /**
  * @param {!Array<{chunk: ?, encoding: string}>} chunks
  * @param {function(!Error=): void} callback
  * @return {void}
  */
-stream.internal.Writable.prototype._writev = function(chunks, callback) {};
+stream.Writable.prototype._writev = function(chunks, callback) {};
 
 /**
  * @param {!Error} error
  * @param {function(!Error=): void} callback
  * @return {void}
  */
-stream.internal.Writable.prototype._destroy = function(error, callback) {};
+stream.Writable.prototype._destroy = function(error, callback) {};
 
 /**
  * @param {!Function} callback
  * @return {void}
  */
-stream.internal.Writable.prototype._final = function(callback) {};
+stream.Writable.prototype._final = function(callback) {};
 
 /**
  * @param {?} chunk
@@ -271,7 +271,7 @@ stream.internal.Writable.prototype._final = function(callback) {};
  * @param {!Function=} cb
  * @return {boolean}
  */
-stream.internal.Writable.prototype.write = function(chunk, cb_or_encoding, cb) {};
+stream.Writable.prototype.write = function(chunk, cb_or_encoding, cb) {};
 
 /**
  * @template THIS
@@ -279,7 +279,7 @@ stream.internal.Writable.prototype.write = function(chunk, cb_or_encoding, cb) {
  * @param {string} encoding
  * @return {THIS}
  */
-stream.internal.Writable.prototype.setDefaultEncoding = function(encoding) {};
+stream.Writable.prototype.setDefaultEncoding = function(encoding) {};
 
 /**
  * @param {!Function|?=} cb_or_chunk
@@ -287,23 +287,23 @@ stream.internal.Writable.prototype.setDefaultEncoding = function(encoding) {};
  * @param {!Function=} cb
  * @return {void}
  */
-stream.internal.Writable.prototype.end = function(cb_or_chunk, cb_or_encoding, cb) {};
+stream.Writable.prototype.end = function(cb_or_chunk, cb_or_encoding, cb) {};
 
 /**
  * @return {void}
  */
-stream.internal.Writable.prototype.cork = function() {};
+stream.Writable.prototype.cork = function() {};
 
 /**
  * @return {void}
  */
-stream.internal.Writable.prototype.uncork = function() {};
+stream.Writable.prototype.uncork = function() {};
 
 /**
  * @param {!Error=} error
  * @return {void}
  */
-stream.internal.Writable.prototype.destroy = function(error) {};
+stream.Writable.prototype.destroy = function(error) {};
 
 /**
  * Event emitter
@@ -317,88 +317,88 @@ stream.internal.Writable.prototype.destroy = function(error) {};
  * @template THIS
  * @this {THIS}
  * @param {string} event
- * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.internal.Readable): void} listener
+ * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.Readable): void} listener
  * @return {THIS}
  */
-stream.internal.Writable.prototype.addListener = function(event, listener) {};
+stream.Writable.prototype.addListener = function(event, listener) {};
 
 /**
  * @param {(string|symbol)|string} event
- * @param {...?|(string|!Buffer)|!Error|!stream.internal.Readable} args_or_chunk_or_err_or_src
+ * @param {...?|(string|!Buffer)|!Error|!stream.Readable} args_or_chunk_or_err_or_src
  * @return {boolean}
  */
-stream.internal.Writable.prototype.emit = function(event, args_or_chunk_or_err_or_src) {};
+stream.Writable.prototype.emit = function(event, args_or_chunk_or_err_or_src) {};
 
 /**
  * @template THIS
  * @this {THIS}
  * @param {string} event
- * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.internal.Readable): void} listener
+ * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.Readable): void} listener
  * @return {THIS}
  */
-stream.internal.Writable.prototype.on = function(event, listener) {};
+stream.Writable.prototype.on = function(event, listener) {};
 
 /**
  * @template THIS
  * @this {THIS}
  * @param {string} event
- * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.internal.Readable): void} listener
+ * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.Readable): void} listener
  * @return {THIS}
  */
-stream.internal.Writable.prototype.once = function(event, listener) {};
+stream.Writable.prototype.once = function(event, listener) {};
 
 /**
  * @template THIS
  * @this {THIS}
  * @param {string} event
- * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.internal.Readable): void} listener
+ * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.Readable): void} listener
  * @return {THIS}
  */
-stream.internal.Writable.prototype.prependListener = function(event, listener) {};
+stream.Writable.prototype.prependListener = function(event, listener) {};
 
 /**
  * @template THIS
  * @this {THIS}
  * @param {string} event
- * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.internal.Readable): void} listener
+ * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.Readable): void} listener
  * @return {THIS}
  */
-stream.internal.Writable.prototype.prependOnceListener = function(event, listener) {};
+stream.Writable.prototype.prependOnceListener = function(event, listener) {};
 
 /**
  * @template THIS
  * @this {THIS}
  * @param {string} event
- * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.internal.Readable): void} listener
+ * @param {function(...?): void|function(): void|function(!Error): void|function(!stream.Readable): void} listener
  * @return {THIS}
  */
-stream.internal.Writable.prototype.removeListener = function(event, listener) {};
+stream.Writable.prototype.removeListener = function(event, listener) {};
 /**
- * @extends {stream.internal.ReadableOptions}
- * @extends {stream.internal.WritableOptions}
+ * @extends {stream.ReadableOptions}
+ * @extends {stream.WritableOptions}
  * @record
  * @struct
  */
-stream.internal.DuplexOptions = function() {};
+stream.DuplexOptions = function() {};
 /** @type {boolean} */
-stream.internal.DuplexOptions.prototype.allowHalfOpen;
+stream.DuplexOptions.prototype.allowHalfOpen;
 /** @type {boolean} */
-stream.internal.DuplexOptions.prototype.readableObjectMode;
+stream.DuplexOptions.prototype.readableObjectMode;
 /** @type {boolean} */
-stream.internal.DuplexOptions.prototype.writableObjectMode;
+stream.DuplexOptions.prototype.writableObjectMode;
 
 /**
- * @extends {stream.internal.Readable}
- * @extends {stream.internal.Writable}
+ * @extends {stream.Readable}
+ * @extends {stream.Writable}
  * @constructor
  * @struct
- * @param {!stream.internal.DuplexOptions=} opts
+ * @param {!stream.DuplexOptions=} opts
  */
-stream.internal.Duplex = function(opts) {};
+stream.Duplex = function(opts) {};
 /** @type {boolean} */
-stream.internal.Duplex.prototype.writable;
+stream.Duplex.prototype.writable;
 /** @type {number} */
-stream.internal.Duplex.prototype.writableHighWaterMark;
+stream.Duplex.prototype.writableHighWaterMark;
 
 /**
  * @param {?} chunk
@@ -406,27 +406,27 @@ stream.internal.Duplex.prototype.writableHighWaterMark;
  * @param {function(!Error=): void} callback
  * @return {void}
  */
-stream.internal.Duplex.prototype._write = function(chunk, encoding, callback) {};
+stream.Duplex.prototype._write = function(chunk, encoding, callback) {};
 
 /**
  * @param {!Array<{chunk: ?, encoding: string}>} chunks
  * @param {function(!Error=): void} callback
  * @return {void}
  */
-stream.internal.Duplex.prototype._writev = function(chunks, callback) {};
+stream.Duplex.prototype._writev = function(chunks, callback) {};
 
 /**
  * @param {!Error} error
  * @param {function(!Error=): void} callback
  * @return {void}
  */
-stream.internal.Duplex.prototype._destroy = function(error, callback) {};
+stream.Duplex.prototype._destroy = function(error, callback) {};
 
 /**
  * @param {!Function} callback
  * @return {void}
  */
-stream.internal.Duplex.prototype._final = function(callback) {};
+stream.Duplex.prototype._final = function(callback) {};
 
 /**
  * @param {?} chunk
@@ -434,7 +434,7 @@ stream.internal.Duplex.prototype._final = function(callback) {};
  * @param {!Function=} cb
  * @return {boolean}
  */
-stream.internal.Duplex.prototype.write = function(chunk, cb_or_encoding, cb) {};
+stream.Duplex.prototype.write = function(chunk, cb_or_encoding, cb) {};
 
 /**
  * @template THIS
@@ -442,7 +442,7 @@ stream.internal.Duplex.prototype.write = function(chunk, cb_or_encoding, cb) {};
  * @param {string} encoding
  * @return {THIS}
  */
-stream.internal.Duplex.prototype.setDefaultEncoding = function(encoding) {};
+stream.Duplex.prototype.setDefaultEncoding = function(encoding) {};
 
 /**
  * @param {!Function|?=} cb_or_chunk
@@ -450,35 +450,35 @@ stream.internal.Duplex.prototype.setDefaultEncoding = function(encoding) {};
  * @param {!Function=} cb
  * @return {void}
  */
-stream.internal.Duplex.prototype.end = function(cb_or_chunk, cb_or_encoding, cb) {};
+stream.Duplex.prototype.end = function(cb_or_chunk, cb_or_encoding, cb) {};
 
 /**
  * @return {void}
  */
-stream.internal.Duplex.prototype.cork = function() {};
+stream.Duplex.prototype.cork = function() {};
 
 /**
  * @return {void}
  */
-stream.internal.Duplex.prototype.uncork = function() {};
+stream.Duplex.prototype.uncork = function() {};
 /**
- * @extends {stream.internal.DuplexOptions}
+ * @extends {stream.DuplexOptions}
  * @record
  * @struct
  */
-stream.internal.TransformOptions = function() {};
+stream.TransformOptions = function() {};
 /** @type {function((string|!Buffer), string, !Function): ?} */
-stream.internal.TransformOptions.prototype.transform;
+stream.TransformOptions.prototype.transform;
 /** @type {function(!Function): ?} */
-stream.internal.TransformOptions.prototype.flush;
+stream.TransformOptions.prototype.flush;
 
 /**
- * @extends {stream.internal.Duplex}
+ * @extends {stream.Duplex}
  * @constructor
  * @struct
- * @param {!stream.internal.TransformOptions=} opts
+ * @param {!stream.TransformOptions=} opts
  */
-stream.internal.Transform = function(opts) {};
+stream.Transform = function(opts) {};
 
 /**
  * @param {?} chunk
@@ -486,16 +486,16 @@ stream.internal.Transform = function(opts) {};
  * @param {!Function} callback
  * @return {void}
  */
-stream.internal.Transform.prototype._transform = function(chunk, encoding, callback) {};
+stream.Transform.prototype._transform = function(chunk, encoding, callback) {};
 
 /**
  * @param {!Error=} error
  * @return {void}
  */
-stream.internal.Transform.prototype.destroy = function(error) {};
+stream.Transform.prototype.destroy = function(error) {};
 /**
- * @extends {stream.internal.Transform}
+ * @extends {stream.Transform}
  * @constructor
  * @struct
  */
-stream.internal.PassThrough = function() {};
+stream.PassThrough = function() {};
