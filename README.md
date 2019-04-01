@@ -21,6 +21,7 @@ yarn add -E @depack/externs
   * [Events](#events)
   * [Stream](#stream)
   * [Crypto](#crypto)
+  * [Dns](#dns)
   * [Fs](#fs)
   * [Tls](#tls)
   * [Http](#http)
@@ -43,10 +44,91 @@ yarn add -E @depack/externs
 The method is to use [`tsickle`](https://github.com/angular/tsickle) on the types definition file for Node.JS (`@types/node/index.d.ts`). However, there are a few steps that were taken to prepare the externs:
 
 1. The definitions are split into individual files, making it easier to track warnings and maintain the manual changes that have to be made for each extern.
-1. When trying to generate from the single file, there's a conflict between `var Buffer` and `interface Buffer`, which TypeScript is fine with, but `tsickle` fails to process properly. Therefore, the `var Buffer` is renamed into `var GlobalBuffer` and is used in the `export interface Global { Buffer: typeof GlobalBuffer; }` which is used in the `global.d.ts`: `declare var global: NodeJS.Global;`.
-1. *TODO* Because `Buffer` is also defined in the `global.d.ts` as `interface Buffer extends NodeBuffer { }`, it is what the externs will recognise as the global _Buffer_, rather than `global.Buffer`. This possibly needs to be fixed by removing `interface Buffer extends NodeBuffer { }` from `global.d.ts` and making all other modules reference it by the name `NodeBuffer`.
+1. When trying to generate from the single file, there's a conflict between `var Buffer` and `interface Buffer`, which TypeScript is fine with, but `tsickle` fails to process properly. Therefore, the `var Buffer` is renamed into `var GlobalBuffer` in the [Node.JS API types](types-v8/nodejs.d.ts#525) and is [referenced](types-v8/nodejs.d.ts#433) as `export interface Global { Buffer: typeof GlobalBuffer; }` which is then [used](types-v8/global.d.ts#69) in the `global.d.ts`: `declare var global: NodeJS.Global;`.
+1. *TODO* Because the `Buffer` interface (not the global var) is [defined](types-v8/global.d.ts#184) in the `global.d.ts` as `interface Buffer extends NodeBuffer { }`, it is what the externs will recognise as the global _Buffer_, rather than `global.Buffer`. This possibly needs to be fixed by removing `interface Buffer extends NodeBuffer { }` from `global.d.ts` and making all other modules reference it by the name of `NodeBuffer` to indicate the type.
 1. Because of [warnings](#warnings-and-todos) and cases that `tsickle` can't handle, some externs need manual update by looking at the error messages and also manual inspection of generated code.
-1. The globals are only defined as the `global` object in **`global.d.ts`**: `declare var global: NodeJS.Global;`. Not sure whether properties of [`NodeJS.Global`](/v8/nodejs.js) other than Buffer should be expanded into the global context, because _Closure_ will probably handle them already since they're generic JS.
+1. The globals are only defined as the `global` object in **`global.d.ts`**: `declare var global: NodeJS.Global;`. Not sure whether properties of [`NodeJS.Global`](/types-v8/nodejs.js#429) other than Buffer should be expanded into the global context, because _Closure_ will probably handle them already since they're generic JS.
+    <details>
+    <summary>Show globals</summary>
+
+    ```ts
+    export interface Global {
+        Array: typeof Array;
+        ArrayBuffer: typeof ArrayBuffer;
+        Boolean: typeof Boolean;
+        Buffer: typeof GlobalBuffer;
+        DataView: typeof DataView;
+        Date: typeof Date;
+        Error: typeof Error;
+        EvalError: typeof EvalError;
+        Float32Array: typeof Float32Array;
+        Float64Array: typeof Float64Array;
+        Function: typeof Function;
+        GLOBAL: Global;
+        Infinity: typeof Infinity;
+        Int16Array: typeof Int16Array;
+        Int32Array: typeof Int32Array;
+        Int8Array: typeof Int8Array;
+        Intl: typeof Intl;
+        JSON: typeof JSON;
+        Map: MapConstructor;
+        Math: typeof Math;
+        NaN: typeof NaN;
+        Number: typeof Number;
+        Object: typeof Object;
+        Promise: Function;
+        RangeError: typeof RangeError;
+        ReferenceError: typeof ReferenceError;
+        RegExp: typeof RegExp;
+        Set: SetConstructor;
+        String: typeof String;
+        Symbol: Function;
+        SyntaxError: typeof SyntaxError;
+        TypeError: typeof TypeError;
+        URIError: typeof URIError;
+        Uint16Array: typeof Uint16Array;
+        Uint32Array: typeof Uint32Array;
+        Uint8Array: typeof Uint8Array;
+        Uint8ClampedArray: Function;
+        WeakMap: WeakMapConstructor;
+        WeakSet: WeakSetConstructor;
+        // clearImmediate is part of global extern
+        clearImmediate: (immediateId: any) => void;
+        // clearInterval is skipped by tsickle
+        clearInterval: (intervalId: NodeJS.Timer) => void;
+        // clearTimeout is skipped by tsickle
+        clearTimeout: (timeoutId: NodeJS.Timer) => void;
+        // console is part of global extern
+        console: typeof console;
+        decodeURI: typeof decodeURI;
+        decodeURIComponent: typeof decodeURIComponent;
+        encodeURI: typeof encodeURI;
+        encodeURIComponent: typeof encodeURIComponent;
+        escape: (str: string) => string;
+        eval: typeof eval;
+        // global is part of global extern
+        global: Global;
+        isFinite: typeof isFinite;
+        isNaN: typeof isNaN;
+        parseFloat: typeof parseFloat;
+        parseInt: typeof parseInt;
+        // process is part of global extern
+        process: Process;
+        // root is NOT part of global extern: SHOULD IT BE?
+        root: Global;
+        // setImmediate is part of global extern
+        setImmediate: (callback: (...args: any[]) => void, ...args: any[]) => any;
+        // setInterval is skipped by tsickle
+        setInterval: (callback: (...args: any[]) => void, ms: number, ...args: any[]) => NodeJS.Timer;
+        // setTimeout is skipped by tsickle
+        setTimeout: (callback: (...args: any[]) => void, ms: number, ...args: any[]) => NodeJS.Timer;
+        undefined: typeof undefined;
+        unescape: (str: string) => string;
+        gc: () => void;
+        v8debug?: any;
+    }
+    ```
+    </details>
 
 ## How To Use
 
@@ -101,17 +183,37 @@ const _buffer = require('buffer')
 
 ## Warnings And Todos
 
-These were the warnings that were emitted during the generation of each extern. Those warnings need to be fixed manually. There are also `TODO` statements generated by `tsickle` that could not perform some analysis. They also need to be fixed manually.
+There were warnings that were emitted during the generation of each extern. Those warnings needed to be fixed manually. There are also `TODO` statements generated by `tsickle` that could not perform some analysis. They also needed (and still need) to be fixed manually.
+
+`tsickle` is not able to handle:
+
+- *`PropertySignature`*:
+    ```ts
+    export interface IncomingHttpHeaders { 'accept'?: string; }
+    ```
+- *`IncludesNonWideningType`*:
+    ```ts
+    export type ServerOptions = tls.SecureContextOptions & tls.TlsOptions;
+    ```
+- *`omitting interface deriving from class`* (not always):
+    ```ts
+    export interface ReadableStream extends EventEmitter { }
+    ```
+- *`omitting heritage reference to a type/value`* (not sure wat):
+    ```ts
+    export interface ErrnoException extends Error { }
+    ```
 
 > *omitting interface deriving from class*
 > For some reason, the class will not always be able to extend another class. E.g., the `@extends {event.EventEmitter}` has to be added manually in many files that rely on it.
 
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true" width="25"></a></p>
 
 ### Export = internal
 
 `Events` and `Stream` have a typed structure that exports an `internal` property:
 
-```js
+```ts
 declare module "events" {
   class internal extends NodeJS.EventEmitter { }
 
@@ -138,7 +240,7 @@ events.internal.EventEmitter.prototype.listenerCount = function(type) {};
 
 This is obviously incorrect, so that `.internal` needs to be removed manually.
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true" width="25"></a></p>
 
 ### Global
 
@@ -147,24 +249,11 @@ This is obviously incorrect, so that `.internal` needs to be removed manually.
 types-v8/global.d.ts(188,1): warning TS0: omitting heritage reference to a type/value conflict: Uint8Array
 ```
 
-Update manually to extend `Uint8Array`:
-
-```js
-/**
- * @extends {NodeBuffer}
- * @record
- * @struct
- */
-function Buffer() {}
-/**
- * @extends {Uint8Array}
- * @record
- * @struct
- */
-function NodeBuffer() {}
-```
+- [x] [Add](v8/global.js#357) `@ extends {Uint8Array}` to _NodeBuffer_.
 
 ### Node.JS
+
+Node.JS is an interface that contains API referenced in other classes. Although there's no such thing as NodeJS extern, its properties are referenced in other externs. Because it is also referenced in the `global.d.ts`, it will always be added by _Depack_ when compiling a _Node.JS_ program.
 
 ```js
 types-v8/nodejs.d.ts(98,3): warning TS0: omitting heritage reference to a type/value conflict: Error
@@ -176,9 +265,16 @@ types-v8/nodejs.d.ts(270,7): warning TS0: should not emit a 'never' type
 types-v8/nodejs.d.ts(446,7): warning TS0: anonymous type has no symbol
 ```
 
+- [x] [Add](v8/nodejs.js#128) `@extends {Error}` to _ErrnoException_
+- [x] [Add](v8/nodejs.js#248) `@extends {NodeJS.EventEmitter}` to _ReadableStream_
+- [x] [Add](v8/nodejs.js#319) `@extends {NodeJS.EventEmitter}` to _WritableStream_
+- [x] [Add](v8/nodejs.js#350) `@extends {NodeJS.EventEmitter}` to _Events_
+- [x] [Add](v8/nodejs.js#652) `@extends {NodeJS.EventEmitter}` to _Process_
+- [ ] [Add](v8/nodejs.js#953) `Intl` type to _NodeJS.Global.prototype.Intl;_
+
 ### Events
 
-Remove `.internal`.
+- [x] Remove `.internal`.
 
 ### Stream
 
@@ -187,7 +283,8 @@ Remove `.internal`.
 types-v8/stream.d.ts(200,7): warning TS0: omitting @implements of a class: Writable
 ```
 
-Remove `.internal`.
+- [x] Remove `.internal`.
+- [x] [Add `@extends {stream.Writable}`](v8/stream.js#L392).
 
 ### Crypto
 
@@ -195,9 +292,11 @@ Remove `.internal`.
 types-v8/crypto.d.ts(10,14): warning TS0: type/symbol conflict for Certificate, using {?} for now
 ```
 
-### Dns
+- [ ] Fix the `Certificate` conflict.
 
-```
+### Dns
+
+```js
 types-v8/dns.d.ts(272,7): warning TS0: unhandled anonymous type with multiple call signatures
 
 types-v8/dns.d.ts(273,7): warning TS0: unhandled anonymous type with multiple call signatures
@@ -205,6 +304,33 @@ types-v8/dns.d.ts(273,7): warning TS0: unhandled anonymous type with multiple ca
 types-v8/dns.d.ts(274,7): warning TS0: unhandled anonymous type with multiple call signatures
 ```
 
+The _Resolver_ class has `resolve`, `resolve4`, `resolve6` methods which it references in its definition, however those methods have multiple call signatures.
+
+```ts
+export function resolve(hostname: string, callback: (err: NodeJS.ErrnoException, addresses: string[]) => void): void;
+export function resolve(hostname: string, rrtype: "A", callback: (err: NodeJS.ErrnoException, addresses: string[]) => void): void;
+export function resolve(hostname: string, rrtype: "AAAA", callback: (err: NodeJS.ErrnoException, addresses: string[]) => void): void;
+// + N more
+
+export class Resolver {
+  ...
+  resolve: typeof resolve;
+  resolve4: typeof resolve4;
+  resolve6: typeof resolve6;
+```
+
+This means the externs cannot be generated.
+
+```js
+/** @type {?} */
+dns.Resolver.prototype.resolve;
+/** @type {?} */
+dns.Resolver.prototype.resolve4;
+/** @type {?} */
+dns.Resolver.prototype.resolve6;
+```
+
+- [ ] Add a type for each of the methods.
 
 ### Fs
 
@@ -213,6 +339,7 @@ types-v8/dns.d.ts(274,7): warning TS0: unhandled anonymous type with multiple ca
 types-v8/fs.d.ts(46,3): warning TS0: omitting interface deriving from class: events.EventEmitter
 ```
 
+- [x] [Add `@extends {events.EventEmitter}`](v8/fs.js#L90) to _FSWatcher_.
 
 ### Tls
 
@@ -221,6 +348,7 @@ types-v8/fs.d.ts(46,3): warning TS0: omitting interface deriving from class: eve
 types-v8/tls.d.ts(327,3): warning TS0: omitting interface deriving from class: stream.Duplex
 ```
 
+- [x] [Add `* @extends {stream.Duplex}`](v8/tld.js#339) to _ClearTextStream_.
 
 ### Http
 
@@ -230,6 +358,7 @@ Update Property Signatures.
 /* TODO: PropertySignature: http.'accept' */
 ```
 
+- [ ] Add property signatures.
 
 ### Https
 
@@ -244,7 +373,6 @@ types-v8/https.d.ts(45,3): warning TS0: unhandled type flags: IncludesNonWidenin
 
 types-v8/https.d.ts(46,3): warning TS0: unhandled type flags: IncludesNonWideningType
 ```
-
 
 ### Http2
 
@@ -320,7 +448,26 @@ types-v8/child_process.d.ts(214,7): warning TS0: unhandled type flags: IncludesN
 ```js
 // export var inspect: {
 types-v8/util.d.ts(11,14): warning TS0: unhandled anonymous type
+```
 
+Here, the `inspect` is defined in curly brackets for all of its possible signatures. `tsickle` does not understand that.
+
+```js
+export var inspect: {
+  (object: any, showHidden?: boolean, depth?: number | null, color?: boolean): string;
+  (object: any, options: InspectOptions): string;
+  colors: {
+    [color: string]: [number, number] | undefined
+  }
+  styles: {
+    [style: string]: string | undefined
+  }
+  defaultOptions: InspectOptions;
+  custom: symbol;
+};
+```
+
+```js
 // export interface CustomPromisify<TCustom extends Function> extends Function {
 types-v8/util.d.ts(42,3): warning TS0: omitting heritage reference to a type/value conflict: Function
 ```
@@ -368,42 +515,39 @@ types-v8/assert.d.ts(19,7): warning TS0: should not emit a 'never' type
 types-v8/assert.d.ts(20,7): warning TS0: should not emit a 'never' type
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true"></a></p>
 
 ## Copyright
 
-The types copyright belongs to their authors:
+The types copyright belongs to their authors.
 
-```js
-// Type definitions for Node.js 8.10
-// Project: http://nodejs.org/
-// Definitions by: Microsoft TypeScript <https://github.com/Microsoft>
-//                 DefinitelyTyped <https://github.com/DefinitelyTyped>
-//                 Parambir Singh <https://github.com/parambirs>
-//                 Christian Vaagland Tellnes <https://github.com/tellnes>
-//                 Wilco Bakker <https://github.com/WilcoBakker>
-//                 Nicolas Voigt <https://github.com/octo-sniffle>
-//                 Chigozirim C. <https://github.com/smac89>
-//                 Flarna <https://github.com/Flarna>
-//                 Mariusz Wiktorczyk <https://github.com/mwiktorczyk>
-//                 wwwy3y3 <https://github.com/wwwy3y3>
-//                 Deividas Bakanas <https://github.com/DeividasBakanas>
-//                 Kelvin Jin <https://github.com/kjin>
-//                 Alvis HT Tang <https://github.com/alvis>
-//                 Sebastian Silbermann <https://github.com/eps1lon>
-//                 Hannes Magnusson <https://github.com/Hannes-Magnusson-CK>
-//                 Alberto Schiabel <https://github.com/jkomyno>
-//                 Huw <https://github.com/hoo29>
-//                 Nicolas Even <https://github.com/n-e>
-//                 Bruno Scheufler <https://github.com/brunoscheufler>
-//                 Hoàng Văn Khải <https://github.com/KSXGitHub>
-//                 Lishude <https://github.com/islishude>
-//                 Andrew Makarov <https://github.com/r3nya>
-//                 Jordi Oliveras Rovira <https://github.com/j-oliveras>
-//                 Thanik Bhongbhibhat <https://github.com/bhongy>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.1
-```
+**Type definitions for Node.js 8.10** by:
+- Microsoft TypeScript <https://github.com/Microsoft>
+- DefinitelyTyped <https://github.com/DefinitelyTyped>
+- Parambir Singh <https://github.com/parambirs>
+- Christian Vaagland Tellnes <https://github.com/tellnes>
+- Wilco Bakker <https://github.com/WilcoBakker>
+- Nicolas Voigt <https://github.com/octo-sniffle>
+- Chigozirim C. <https://github.com/smac89>
+- Flarna <https://github.com/Flarna>
+- Mariusz Wiktorczyk <https://github.com/mwiktorczyk>
+- wwwy3y3 <https://github.com/wwwy3y3>
+- Deividas Bakanas <https://github.com/DeividasBakanas>
+- Kelvin Jin <https://github.com/kjin>
+- Alvis HT Tang <https://github.com/alvis>
+- Sebastian Silbermann <https://github.com/eps1lon>
+- Hannes Magnusson <https://github.com/Hannes-Magnusson-CK>
+- Alberto Schiabel <https://github.com/jkomyno>
+- Huw <https://github.com/hoo29>
+- Nicolas Even <https://github.com/n-e>
+- Bruno Scheufler <https://github.com/brunoscheufler>
+- Hoàng Văn Khải <https://github.com/KSXGitHub>
+- Lishude <https://github.com/islishude>
+- Andrew Makarov <https://github.com/r3nya>
+- Jordi Oliveras Rovira <https://github.com/j-oliveras>
+- Thanik Bhongbhibhat <https://github.com/bhongy>
+
+Taken from https://github.com/DefinitelyTyped/DefinitelyTyped
 
 <table>
   <tr>
