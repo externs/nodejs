@@ -1,4 +1,7 @@
-module.exports = {
+/**
+ * If an extern depends on others, it will be present in this list.
+ */
+const dependencies = {
   url: ['querystring'],
   stream: ['events'],
   net: ['stream', 'events', 'dns'],
@@ -17,3 +20,5 @@ module.exports = {
   domain: ['events'],
   tty: ['net'],
 }
+
+module.exports=dependencies

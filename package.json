@@ -2,6 +2,7 @@
   "name": "@depack/externs",
   "version": "1.0.0",
   "description": "The Externs For Node.JS.",
+  "main": "build/index.js",
   "module": "src/index.js",
   "scripts": {
     "t": "zoroaster -a",

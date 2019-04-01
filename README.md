@@ -12,6 +12,7 @@ yarn add -E @depack/externs
 
 - [Table Of Contents](#table-of-contents)
 - [Method](#method)
+- [API](#api)
 - [How To Use](#how-to-use)
   * [Global Conflict](#global-conflict)
 - [Warnings And Todos](#warnings-and-todos)
@@ -130,6 +131,43 @@ The method is to use [`tsickle`](https://github.com/angular/tsickle) on the type
     ```
     </details>
 
+## API
+
+```js
+import dependencies from '@depack/externs'
+```
+
+The externs for each of the modules are found in the published `v8` directory. The `global` and `nodejs` externs always need to be present when compiling a Node.JS program (unless its in pure JS). Externs might depend on other externs, and the dependency tree is what this package exports:
+
+```js
+/**
+ * If an extern depends on others, it will be present in this list.
+ */
+const dependencies = {
+  url: ['querystring'],
+  stream: ['events'],
+  net: ['stream', 'events', 'dns'],
+  fs: ['stream', 'events', 'url'],
+  tls: ['crypto', 'dns', 'net', 'stream'],
+  http: ['events', 'net', 'stream', 'url'],
+  https: ['tls', 'events', 'http', 'url'],
+  http2: ['events', 'fs', 'net', 'stream', 'tls', 'http', 'url'],
+  zlib: ['stream'],
+  child_process: ['events', 'stream', 'net'],
+  cluster: ['child_process', 'events', 'net'],
+  readline: ['events', 'stream'],
+  repl: ['stream', 'readline'],
+  dgram: ['events', 'dns'],
+  string_decoder: ['buffer'],
+  domain: ['events'],
+  tty: ['net'],
+}
+
+export default dependencies
+```
+
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true"></a></p>
+
 ## How To Use
 
 These externs were generated for the use by _Depack_: the dependency bundler for the web and back-end Node.JS. _Depack_ will perform regex-based static analysis on modules, and when they import an internal module (e.g., `path`), it will mark an extern as needed to be added. It will then add the `require` call to the output wrapper:
@@ -167,7 +205,7 @@ export const {
 
 Because `path` was previously defined in the output wrapper, all its properties will be destructured and exported correctly.
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true" width="25"></a></p>
 
 ### Global Conflict
 
@@ -179,7 +217,7 @@ const _console = require('console')
 const _buffer = require('buffer')
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true"></a></p>
 
 ## Warnings And Todos
 
@@ -207,7 +245,7 @@ There were warnings that were emitted during the generation of each extern. Thos
 > *omitting interface deriving from class*
 > For some reason, the class will not always be able to extend another class. E.g., the `@extends {event.EventEmitter}` has to be added manually in many files that rely on it.
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true" width="25"></a></p>
 
 ### Export = internal
 
@@ -240,7 +278,7 @@ events.internal.EventEmitter.prototype.listenerCount = function(type) {};
 
 This is obviously incorrect, so that `.internal` needs to be removed manually.
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true" width="25"></a></p>
 
 ### Global
 
@@ -515,7 +553,7 @@ types-v8/assert.d.ts(19,7): warning TS0: should not emit a 'never' type
 types-v8/assert.d.ts(20,7): warning TS0: should not emit a 'never' type
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/6.svg?sanitize=true"></a></p>
 
 ## Copyright
 
