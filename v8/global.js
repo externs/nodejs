@@ -354,6 +354,7 @@ var BufferEncoding;
  */
 function Buffer() {}
 /**
+ * @extends {Uint8Array}
  * @record
  * @struct
  */

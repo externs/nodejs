@@ -6,6 +6,6 @@
     "sourceMap": true
   },
   "files": [
-    "types-v8/buffer.d.ts"
+    "types-v8/events.d.ts"
   ]
 }
