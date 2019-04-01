@@ -59,7 +59,14 @@
   },
   "keywords": [
     "externs",
-    "depack"
+    "depack",
+    "gcc",
+    "google closure compiler",
+    "node",
+    "node.js",
+    "nodejs",
+    "bundle",
+    "bundler"
   ],
   "author": "Anton <anton@adc.sh>",
   "license": "MIT",
