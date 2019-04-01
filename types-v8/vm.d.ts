@@ -1,5 +1,3 @@
-/// <reference path="./buffer.d.ts"/>
-
 declare module "vm" {
   export interface Context { }
   export interface ScriptOptions {

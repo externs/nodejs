@@ -1,7 +1,6 @@
 /// <reference path="./events.d.ts"/>
 /// <reference path="./dns.d.ts"/>
 /// <reference path="./nodejs.d.ts"/>
-/// <reference path="./buffer.d.ts"/>
 
 declare module "dgram" {
   import * as events from "events";

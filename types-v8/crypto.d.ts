@@ -1,4 +1,3 @@
-/// <reference path="./buffer.d.ts"/>
 /// <reference path="./nodejs.d.ts"/>
 
 declare module "crypto" {

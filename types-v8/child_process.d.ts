@@ -1,7 +1,6 @@
 /// <reference path="./events.d.ts"/>
 /// <reference path="./stream.d.ts"/>
 /// <reference path="./net.d.ts"/>
-/// <reference path="./buffer.d.ts"/>
 
 declare module "child_process" {
   import * as events from "events";

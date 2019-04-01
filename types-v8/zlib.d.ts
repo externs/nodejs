@@ -1,4 +1,3 @@
-/// <reference path="./buffer.d.ts"/>
 /// <reference path="./stream.d.ts"/>
 
 declare module "zlib" {

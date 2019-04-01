@@ -22,8 +22,6 @@
     "querystring": "tsickle --externs=v8/querystring.js",
     "url": "tsickle --externs=v8/url.js",
     "vm": "tsickle --externs=v8/vm.js",
-    "_global": "tsickle --externs=v8/global.js",
-    "buffer": "tsickle --externs=v8/buffer.js",
     "nodejs": "tsickle --externs=v8/nodejs.js",
     "events": "tsickle --externs=v8/events.js",
     "stream": "tsickle --externs=v8/stream.js",
@@ -50,7 +48,8 @@
     "domain": "tsickle --externs=v8/domain.js",
     "tty": "tsickle --externs=v8/tty.js",
     "assert": "tsickle --externs=v8/assert.js",
-    "_buffer": "tsickle --externs=v8/_buffer.js"
+    "buffer": "tsickle --externs=v8/buffer.js",
+    "_global": "tsickle --externs=v8/global.js"
   },
   "files": [
     "build",
