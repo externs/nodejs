@@ -13,6 +13,7 @@ yarn add -E @depack/externs
 - [Table Of Contents](#table-of-contents)
 - [Method](#method)
 - [API](#api)
+- [`getExternsDir(): string`](#getexternsdir-string)
 - [How To Use](#how-to-use)
   * [Global Conflict](#global-conflict)
 - [Warnings And Todos](#warnings-and-todos)
@@ -134,50 +135,48 @@ The method is to use [`tsickle`](https://github.com/angular/tsickle) on the type
 ## API
 
 ```js
-import dependencies from '@depack/externs'
+import getExternsDir, { dependencies } from '@depack/externs'
 ```
 
-The externs for each of the modules are found in the published `v8` directory. The `global` and `nodejs` externs always need to be present when compiling a Node.JS program (unless its in pure JS). Externs might depend on other externs, and the dependency tree is what this package exports:
+The externs for each of the modules are found in the published `v8` directory. The `global` and `nodejs` externs always need to be present when compiling a _Node.JS_ program (unless its in pure JS). Externs might depend on other externs, and the dependency tree is exported by this package:
 
 ```js
-import { relative, dirname, join } from 'path'
-/**
- * If an extern depends on others, it will be present in this list.
- */
-export const dependencies = {
-  url: ['querystring'],
-  stream: ['events'],
-  net: ['stream', 'events', 'dns'],
-  fs: ['stream', 'events', 'url'],
-  tls: ['crypto', 'dns', 'net', 'stream'],
-  http: ['events', 'net', 'stream', 'url'],
-  https: ['tls', 'events', 'http', 'url'],
-  http2: ['events', 'fs', 'net', 'stream', 'tls', 'http', 'url'],
-  zlib: ['stream'],
-  child_process: ['events', 'stream', 'net'],
-  cluster: ['child_process', 'events', 'net'],
-  readline: ['events', 'stream'],
-  repl: ['stream', 'readline'],
-  dgram: ['events', 'dns'],
-  string_decoder: ['buffer'],
-  domain: ['events'],
-  tty: ['net'],
-}
+/* alanode example/ */
+import getExternsDir, { dependencies } from '../src'
 
-/**
- * Returns the path to the `v8` externs by calling the `require.resolve` to get the pack to the `@depack/externs` package.
- */
-const getExternsDir = () => {
-  const externs = relative('',
-    dirname(require.resolve('@depack/externs/package.json')))
-  const externsDir = join(externs, 'v8')
-  return externsDir
-}
-
-export default getExternsDir
+console.log('Externs dir: %s', getExternsDir())
+console.log('Dependencies:')
+console.log(dependencies)
+```
+```js
+Externs dir: v8
+Dependencies:
+{ url: [ 'querystring' ],
+  stream: [ 'events' ],
+  net: [ 'stream', 'events', 'dns' ],
+  fs: [ 'stream', 'events', 'url' ],
+  tls: [ 'crypto', 'dns', 'net', 'stream' ],
+  http: [ 'events', 'net', 'stream', 'url' ],
+  https: [ 'tls', 'events', 'http', 'url' ],
+  http2: [ 'events', 'fs', 'net', 'stream', 'tls', 'http', 'url' ],
+  zlib: [ 'stream' ],
+  child_process: [ 'events', 'stream', 'net' ],
+  cluster: [ 'child_process', 'events', 'net' ],
+  readline: [ 'events', 'stream' ],
+  repl: [ 'stream', 'readline' ],
+  dgram: [ 'events', 'dns' ],
+  string_decoder: [ 'buffer' ],
+  domain: [ 'events' ],
+  tty: [ 'net' ] }
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true" width="25"></a></p>
+
+## `getExternsDir(): string`
+
+Runs `require.resolve('@depack/externs/package.json')` to find the location of this package, and adds the `v8` at the end to point to the externs version 8 (currently only Node 8 is supported).
+
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true"></a></p>
 
 ## How To Use
 
@@ -216,7 +215,7 @@ export const {
 
 Because `path` was previously defined in the output wrapper, all its properties will be destructured and exported correctly.
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true" width="25"></a></p>
 
 ### Global Conflict
 
@@ -228,7 +227,7 @@ const _console = require('console')
 const _buffer = require('buffer')
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true"></a></p>
 
 ## Warnings And Todos
 
@@ -256,7 +255,7 @@ There were warnings that were emitted during the generation of each extern. Thos
 > *omitting interface deriving from class*
 > For some reason, the class will not always be able to extend another class. E.g., the `@extends {event.EventEmitter}` has to be added manually in many files that rely on it.
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true" width="25"></a></p>
 
 ### Export = internal
 
@@ -289,7 +288,7 @@ events.internal.EventEmitter.prototype.listenerCount = function(type) {};
 
 This is obviously incorrect, so that `.internal` needs to be removed manually.
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/6.svg?sanitize=true" width="25"></a></p>
 
 
 ### Global
@@ -618,7 +617,7 @@ types-v8/assert.d.ts(19,7): warning TS0: should not emit a 'never' type
 types-v8/assert.d.ts(20,7): warning TS0: should not emit a 'never' type
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/6.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/7.svg?sanitize=true"></a></p>
 
 ## Copyright
 

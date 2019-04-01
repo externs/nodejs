@@ -1,5 +1,10 @@
 ## 1 April 2019
 
+### [1.1.0](https://github.com/dpck/externs/compare/v1.0.1...v1.1.0)
+
+- [feature] Add a function to resolve the path to the externs directory.
+- [fix] Update `stream` and `events` to prevent warning; remove `@struct` from `process.env`.
+
 ### [1.0.1](https://github.com/dpck/externs/compare/v1.0.0...v1.0.1)
 
 - [package] Publish dependencies.

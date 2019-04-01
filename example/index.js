@@ -1,9 +1,6 @@
 /* alanode example/ */
-import externs from '../src'
+import getExternsDir, { dependencies } from '../src'
 
-(async () => {
-  const res = await externs({
-    text: 'example',
-  })
-  console.log(res)
-})()
+console.log('Externs dir: %s', getExternsDir())
+console.log('Dependencies:')
+console.log(dependencies)
