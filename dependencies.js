@@ -17,4 +17,8 @@ module.exports = {
   http2: ['events', 'fs', 'net', 'stream', 'tls', 'http', 'url', 'nodejs', 'buffer'],
   zlib: ['buffer', 'stream'],
   child_process: ['events', 'stream', 'net', 'buffer'],
+  timers: ['nodejs'],
+  _process: ['nodejs'],
+  _module: ['nodejs'],
+  _console: ['global'],
 }
