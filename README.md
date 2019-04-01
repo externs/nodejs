@@ -11,6 +11,7 @@ yarn add -E @depack/externs
 ## Table Of Contents
 
 - [Table Of Contents](#table-of-contents)
+- [Method](#method)
 - [How To Use](#how-to-use)
   * [Global Conflict](#global-conflict)
 - [Warnings And Todos](#warnings-and-todos)
@@ -29,12 +30,23 @@ yarn add -E @depack/externs
   * [Child_Process](#child_process)
   * [Util](#util)
   * [Cluster](#cluster)
+  * [Punycode](#punycode)
   * [Readline](#readline)
   * [Repl](#repl)
   * [Assert](#assert)
 - [Copyright](#copyright)
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/0.svg?sanitize=true"></a></p>
+
+## Method
+
+The method is to use [`tsickle`](https://github.com/angular/tsickle) on the types definition file for Node.JS (`@types/node/index.d.ts`). However, there are a few steps that were taken to prepare the externs:
+
+1. The definitions are split into individual files, making it easier to track warnings and maintain the manual changes that have to be made for each extern.
+1. When trying to generate from the single file, there's a conflict between `var Buffer` and `interface Buffer`, which TypeScript is fine with, but `tsickle` fails to process properly. Therefore, the `var Buffer` is renamed into `var GlobalBuffer` and is used in the `export interface Global { Buffer: typeof GlobalBuffer; }` which is used in the `global.d.ts`: `declare var global: NodeJS.Global;`.
+1. *TODO* Because `Buffer` is also defined in the `global.d.ts` as `interface Buffer extends NodeBuffer { }`, it is what the externs will recognise as the global _Buffer_, rather than `global.Buffer`. This possibly needs to be fixed by removing `interface Buffer extends NodeBuffer { }` from `global.d.ts` and making all other modules reference it by the name `NodeBuffer`.
+1. Because of [warnings](#warnings-and-todos) and cases that `tsickle` can't handle, some externs need manual update by looking at the error messages and also manual inspection of generated code.
+1. The globals are only defined as the `global` object in **`global.d.ts`**: `declare var global: NodeJS.Global;`. Not sure whether properties of [`NodeJS.Global`](/v8/nodejs.js) other than Buffer should be expanded into the global context, because _Closure_ will probably handle them already since they're generic JS.
 
 ## How To Use
 
@@ -322,7 +334,7 @@ types-v8/cluster.d.ts(98,3): warning TS0: omitting interface deriving from class
 ```
 
 
-### Punycode
+### Punycode
 
 ```js
 //   export var ucs2: ucs2;

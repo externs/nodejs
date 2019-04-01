@@ -233,7 +233,7 @@ types-v8/cluster.d.ts(98,3): warning TS0: omitting interface deriving from class
 ```
 
 
-### Punycode
+### Punycode
 
 ```js
 //   export var ucs2: ucs2;
