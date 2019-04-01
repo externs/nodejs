@@ -280,6 +280,7 @@ This is obviously incorrect, so that `.internal` needs to be removed manually.
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true" width="25"></a></p>
 
+
 ### Global
 
 ```js
@@ -310,9 +311,47 @@ types-v8/nodejs.d.ts(446,7): warning TS0: anonymous type has no symbol
 - [x] [Add](v8/nodejs.js#652) `@extends {NodeJS.EventEmitter}` to _Process_
 - [ ] [Add](v8/nodejs.js#953) `Intl` type to _NodeJS.Global.prototype.Intl;_
 
+
 ### Events
 
 - [x] Remove `.internal`.
+
+Because events is both a namespace, and a function, it is exported in the following way:
+
+```js
+/** @const */
+var events = {};
+/**
+ * @extends {NodeJS.EventEmitter}
+ * @constructor
+ * @struct
+ */
+events = function() {};
+```
+
+This will lead to the compiler warning:
+
+```js
+v8/events.js:15: WARNING - accessing name events in externs has no effect. Perhaps you forgot to add a var keyword?
+events = function() {};
+^^^^^^⏎
+
+v8/events.js:15: WARNING - constant events assigned a value more than once.
+Original definition at v8/events.js:9
+events = function() {};
+^^^^^^^^^^^^^^^^^^^^^^⏎
+```
+
+Therefore, we collapse the 2 declarations together into
+
+```js
+/**
+ * @extends {NodeJS.EventEmitter}
+ * @constructor
+ * @struct
+ */
+var events = function() {};
+```
 
 ### Stream
 
@@ -322,7 +361,18 @@ types-v8/stream.d.ts(200,7): warning TS0: omitting @implements of a class: Writa
 ```
 
 - [x] Remove `.internal`.
-- [x] [Add `@extends {stream.Writable}`](v8/stream.js#L392).
+- [x] Because `@constructor` cannot inherit more than one class, the `@extends {Writable}` is not added, however because the methods have been defined in types as implementations of the `Writable` interfaces, they are added to the Duplex prototype itself.
+
+Same as for _events_ (see above), collapse the declaration into a single `var` definition.
+
+```js
+/**
+ * @extends {events.EventEmitter}
+ * @constructor
+ * @struct
+ */
+var stream = function() {};
+```
 
 ### Crypto
 
