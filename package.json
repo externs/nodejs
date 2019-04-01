@@ -16,7 +16,7 @@
     "d": "yarn-s d1",
     "d1": "NODE_DEBUG=doc doc src/index.js -g",
     "build": "yarn-s d b doc",
-    "tsconfig": "alanode tsconfig",
+    "ts": "alanode tsconfig",
     "e": "alanode",
     "os": "tsickle --externs=v8/os.js",
     "querystring": "tsickle --externs=v8/querystring.js",
@@ -45,7 +45,12 @@
     "_console": "tsickle --externs=v8/_console.js",
     "_module": "tsickle --externs=v8/_module.js",
     "constants": "tsickle --externs=v8/constants.js",
-    "v8": "tsickle --externs=v8/v8.js"
+    "v8": "tsickle --externs=v8/v8.js",
+    "string_decoder": "tsickle --externs=v8/string_decoder.js",
+    "domain": "tsickle --externs=v8/domain.js",
+    "tty": "tsickle --externs=v8/tty.js",
+    "assert": "tsickle --externs=v8/assert.js",
+    "_buffer": "tsickle --externs=v8/_buffer.js"
   },
   "files": [
     "build",
