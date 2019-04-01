@@ -1,3 +1,3 @@
 /// <reference path="./nodejs.d.ts"/>
 
-declare var _process: NodeJS.Module
+declare var _module: NodeJS.Module

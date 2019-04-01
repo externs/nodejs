@@ -2,7 +2,6 @@
   "name": "@depack/externs",
   "version": "0.0.0-pre",
   "description": "The Externs For Node.JS.",
-  "main": "build/index.js",
   "module": "src/index.js",
   "scripts": {
     "t": "zoroaster -a",
@@ -52,8 +51,7 @@
     "_global": "tsickle --externs=v8/global.js"
   },
   "files": [
-    "build",
-    "src"
+    "v8"
   ],
   "repository": {
     "type": "git",
