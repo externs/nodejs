@@ -140,10 +140,11 @@ import dependencies from '@depack/externs'
 The externs for each of the modules are found in the published `v8` directory. The `global` and `nodejs` externs always need to be present when compiling a Node.JS program (unless its in pure JS). Externs might depend on other externs, and the dependency tree is what this package exports:
 
 ```js
+import { relative, dirname, join } from 'path'
 /**
  * If an extern depends on others, it will be present in this list.
  */
-const dependencies = {
+export const dependencies = {
   url: ['querystring'],
   stream: ['events'],
   net: ['stream', 'events', 'dns'],
@@ -163,7 +164,17 @@ const dependencies = {
   tty: ['net'],
 }
 
-export default dependencies
+/**
+ * Returns the path to the `v8` externs by calling the `require.resolve` to get the pack to the `@depack/externs` package.
+ */
+const getExternsDir = () => {
+  const externs = relative('',
+    dirname(require.resolve('@depack/externs/package.json')))
+  const externsDir = join(externs, 'v8')
+  return externsDir
+}
+
+export default getExternsDir
 ```
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true"></a></p>
@@ -310,7 +321,11 @@ types-v8/nodejs.d.ts(446,7): warning TS0: anonymous type has no symbol
 - [x] [Add](v8/nodejs.js#350) `@extends {NodeJS.EventEmitter}` to _Events_
 - [x] [Add](v8/nodejs.js#652) `@extends {NodeJS.EventEmitter}` to _Process_
 - [ ] [Add](v8/nodejs.js#953) `Intl` type to _NodeJS.Global.prototype.Intl;_
-
+- [x] [Remove](v8/nodejs.js#546) `@struct` from _ProcessEnv_ to prevent warning
+    ```js
+    test/code.js:7: WARNING - Cannot do '[]' access on a struct
+    const output = process.env['OUTPUT']
+    ```
 
 ### Events
 

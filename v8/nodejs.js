@@ -544,7 +544,6 @@ NodeJS.Socket = function() {};
 NodeJS.Socket.prototype.isTTY;
 /**
  * @record
- * @struct
  */
 NodeJS.ProcessEnv = function() {};
 

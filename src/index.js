@@ -1,7 +1,8 @@
+import { relative, dirname, join } from 'path'
 /**
  * If an extern depends on others, it will be present in this list.
  */
-const dependencies = {
+export const dependencies = {
   url: ['querystring'],
   stream: ['events'],
   net: ['stream', 'events', 'dns'],
@@ -21,4 +22,14 @@ const dependencies = {
   tty: ['net'],
 }
 
-export default dependencies
+/**
+ * Returns the path to the `v8` externs by calling the `require.resolve` to get the pack to the `@depack/externs` package.
+ */
+const getExternsDir = () => {
+  const externs = relative('',
+    dirname(require.resolve('@depack/externs/package.json')))
+  const externsDir = join(externs, 'v8')
+  return externsDir
+}
+
+export default getExternsDir

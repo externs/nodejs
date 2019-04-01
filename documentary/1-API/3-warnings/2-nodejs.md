@@ -18,3 +18,8 @@ types-v8/nodejs.d.ts(446,7): warning TS0: anonymous type has no symbol
 - [x] [Add](v8/nodejs.js#350) `@extends {NodeJS.EventEmitter}` to _Events_
 - [x] [Add](v8/nodejs.js#652) `@extends {NodeJS.EventEmitter}` to _Process_
 - [ ] [Add](v8/nodejs.js#953) `Intl` type to _NodeJS.Global.prototype.Intl;_
+- [x] [Remove](v8/nodejs.js#546) `@struct` from _ProcessEnv_ to prevent warning
+    ```js
+    test/code.js:7: WARNING - Cannot do '[]' access on a struct
+    const output = process.env['OUTPUT']
+    ```
