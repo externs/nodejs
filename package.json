@@ -52,7 +52,8 @@
     "_global": "tsickle --externs=v8/global.js"
   },
   "files": [
-    "v8"
+    "v8",
+    "src"
   ],
   "repository": {
     "type": "git",
