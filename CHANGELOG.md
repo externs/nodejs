@@ -1,3 +1,9 @@
+## 2 April 2019
+
+### [1.1.1](https://github.com/dpck/externs/compare/v1.1.0...v1.1.1)
+
+- [package] Publish `src`.
+
 ## 1 April 2019
 
 ### [1.1.0](https://github.com/dpck/externs/compare/v1.0.1...v1.1.0)
