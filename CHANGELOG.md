@@ -1,3 +1,10 @@
+## 9 April 2019
+
+### [1.2.0](https://github.com/dpck/externs/compare/v1.1.1...v1.2.0)
+
+- [fix] Fix `readline` extern that used `interface`.
+- [doc] Document some missing methods and properties, include `WIP`.
+
 ## 2 April 2019
 
 ### [1.1.1](https://github.com/dpck/externs/compare/v1.1.0...v1.1.1)
