@@ -184,15 +184,6 @@ export var inspect: {
 types-v8/util.d.ts(42,3): warning TS0: omitting heritage reference to a type/value conflict: Function
 ```
 
-
-### Cluster
-
-```js
-// export interface Cluster extends events.EventEmitter {
-types-v8/cluster.d.ts(98,3): warning TS0: omitting interface deriving from class: events.EventEmitter
-```
-
-
 ### Punycode
 
 ```js

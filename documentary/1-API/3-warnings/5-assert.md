@@ -14,3 +14,9 @@ types-v8/assert.d.ts(20,7): warning TS0: should not emit a 'never' type
     // export class AssertionError implements Error {
     types-v8/assert.d.ts(4,7): warning TS0: omitting heritage reference to a type/value conflict: Error
     ```
+
+#### Missing Methods In Types
+
+- [ ] `doesNotReject` added in `V8.13.0`
+- [ ] `rejects` added in `V8.13.0`
+- [ ] `strict` added in `V8.13.0`
