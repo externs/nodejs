@@ -221,17 +221,4 @@ types-v8/readline.d.ts(17,3): warning TS0: omitting interface deriving from clas
 types-v8/repl.d.ts(65,3): warning TS0: omitting heritage reference to a type/value conflict: SyntaxError
 ```
 
-### Assert
-
-```js
-// export class AssertionError implements Error {
-types-v8/assert.d.ts(4,7): warning TS0: omitting heritage reference to a type/value conflict: Error
-
-// export function fail(message?: string): never;
-types-v8/assert.d.ts(19,7): warning TS0: should not emit a 'never' type
-
-// export function fail(actual: any, expected: any, message?: string, operator?: string, stackStartFn?: Function): never;
-types-v8/assert.d.ts(20,7): warning TS0: should not emit a 'never' type
-```
-
 %~%

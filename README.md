@@ -22,6 +22,7 @@ yarn add -E @depack/externs
   * [Node.JS](#nodejs)
   * [Events](#events)
   * [Stream](#stream)
+  * [Assert](#assert)
   * [Crypto](#crypto)
   * [Dns](#dns)
   * [Fs](#fs)
@@ -36,7 +37,6 @@ yarn add -E @depack/externs
   * [Punycode](#punycode)
   * [Readline](#readline)
   * [Repl](#repl)
-  * [Assert](#assert)
 - [Copyright](#copyright)
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/0.svg?sanitize=true"></a></p>
@@ -388,6 +388,23 @@ Same as for _events_ (see above), collapse the declaration into a single `var` d
 var stream = function() {};
 ```
 
+### Assert
+
+```js
+// export function fail(message?: string): never;
+types-v8/assert.d.ts(19,7): warning TS0: should not emit a 'never' type
+
+// export function fail(actual: any, expected: any, message?: string, operator?: string, stackStartFn?: Function): never;
+types-v8/assert.d.ts(20,7): warning TS0: should not emit a 'never' type
+```
+
+- [x] Remove `.internal` and `{}` namespace declaration (see Events for description).
+- [x] Despite the warning, the `AssertionError` [does extend](v8/assert.js#16) `Error`.
+    ```js
+    // export class AssertionError implements Error {
+    types-v8/assert.d.ts(4,7): warning TS0: omitting heritage reference to a type/value conflict: Error
+    ```
+
 ### Crypto
 
 ```js
@@ -609,19 +626,6 @@ types-v8/readline.d.ts(17,3): warning TS0: omitting interface deriving from clas
 ```js
 // export class Recoverable extends SyntaxError {
 types-v8/repl.d.ts(65,3): warning TS0: omitting heritage reference to a type/value conflict: SyntaxError
-```
-
-### Assert
-
-```js
-// export class AssertionError implements Error {
-types-v8/assert.d.ts(4,7): warning TS0: omitting heritage reference to a type/value conflict: Error
-
-// export function fail(message?: string): never;
-types-v8/assert.d.ts(19,7): warning TS0: should not emit a 'never' type
-
-// export function fail(actual: any, expected: any, message?: string, operator?: string, stackStartFn?: Function): never;
-types-v8/assert.d.ts(20,7): warning TS0: should not emit a 'never' type
 ```
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/7.svg?sanitize=true"></a></p>
