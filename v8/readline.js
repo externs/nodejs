@@ -179,10 +179,10 @@ readline.cursorTo = function(stream, x, y) {};
 
 /**
  * @param {!NodeJS.ReadableStream} stream
- * @param {!readline.ReadLine=} interface
+ * @param {!readline.ReadLine=} _interface
  * @return {void}
  */
-readline.emitKeypressEvents = function(stream, interface) {};
+readline.emitKeypressEvents = function(stream, _interface) {};
 
 /**
  * @param {!NodeJS.WritableStream} stream

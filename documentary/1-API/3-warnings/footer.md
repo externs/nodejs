@@ -207,6 +207,13 @@ types-v8/punycode.d.ts(6,14): warning TS0: type/symbol conflict for ucs2, using 
 types-v8/readline.d.ts(17,3): warning TS0: omitting interface deriving from class: events.EventEmitter
 ```
 
+- [x] [Rename](v8/readline.js#185) `interface` argument to `_interface`, otherwise the following error is shown:
+    ```js
+    @depack/externs/v8/readline.js:185: ERROR - Parse error. ')' expected
+    readline.emitKeypressEvents = function(stream, interface) {};
+                                                  ^
+    ```
+
 ### Repl
 
 ```js

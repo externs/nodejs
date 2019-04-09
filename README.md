@@ -348,12 +348,12 @@ This will lead to the compiler warning:
 ```js
 v8/events.js:15: WARNING - accessing name events in externs has no effect. Perhaps you forgot to add a var keyword?
 events = function() {};
-^^^^^^⏎
+^^^^^^
 
 v8/events.js:15: WARNING - constant events assigned a value more than once.
 Original definition at v8/events.js:9
 events = function() {};
-^^^^^^^^^^^^^^^^^^^^^^⏎
+^^^^^^^^^^^^^^^^^^^^^^
 ```
 
 Therefore, we collapse the 2 declarations together into
@@ -596,6 +596,13 @@ types-v8/punycode.d.ts(6,14): warning TS0: type/symbol conflict for ucs2, using 
 // export interface ReadLine extends events.EventEmitter {
 types-v8/readline.d.ts(17,3): warning TS0: omitting interface deriving from class: events.EventEmitter
 ```
+
+- [x] [Rename](v8/readline.js#185) `interface` argument to `_interface`, otherwise the following error is shown:
+    ```js
+    @depack/externs/v8/readline.js:185: ERROR - Parse error. ')' expected
+    readline.emitKeypressEvents = function(stream, interface) {};
+                                                  ^
+    ```
 
 ### Repl
 
