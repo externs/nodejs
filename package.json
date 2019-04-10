@@ -1,6 +1,6 @@
 {
   "name": "@depack/externs",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "The Externs For Node.JS.",
   "main": "build/index.js",
   "module": "src/index.js",
