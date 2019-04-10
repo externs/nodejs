@@ -153,30 +153,6 @@ node_modules/http2/index.js:4: WARNING - Access to private property Http2ServerR
   Http2ServerResponse,
   ^^^^^^^^^^^^^^^^^^^
 
-node_modules/module/index.js:3: WARNING - Property Module never defined on NodeJS.Module
-  Module,
-  ^^^^^^
-
-node_modules/module/index.js:4: WARNING - Property builtinModules never defined on NodeJS.Module
-  builtinModules,
-  ^^^^^^^^^^^^^^
-
-node_modules/module/index.js:5: WARNING - Property globalPaths never defined on NodeJS.Module
-  globalPaths,
-  ^^^^^^^^^^^
-
-node_modules/module/index.js:6: WARNING - Property runMain never defined on NodeJS.Module
-  runMain,
-  ^^^^^^^
-
-node_modules/module/index.js:7: WARNING - Property wrap never defined on NodeJS.Module
-  wrap,
-  ^^^^
-
-node_modules/module/index.js:8: WARNING - Property wrapper never defined on NodeJS.Module
-  wrapper,
-  ^^^^^^^
-
 node_modules/net/index.js:5: WARNING - Property Stream never defined on net
   Stream,
   ^^^^^^
