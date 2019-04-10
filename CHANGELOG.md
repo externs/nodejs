@@ -1,3 +1,9 @@
+## 10 April 2019
+
+### [1.2.1](https://github.com/dpck/externs/compare/v1.2.0...v1.2.1)
+
+- [externs] Fix `module` extern and by moving it out of the `node.js` extern.
+
 ## 9 April 2019
 
 ### [1.2.0](https://github.com/dpck/externs/compare/v1.1.1...v1.2.0)
