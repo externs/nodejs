@@ -1059,43 +1059,5 @@ NodeJS.Timer.prototype.ref = function() {};
  */
 NodeJS.Timer.prototype.unref = function() {};
 
-/**
- * @constructor
- * @struct
- * @param {string} id
- * @param {!NodeJS.Module=} parent
- */
-NodeJS.Module = function(id, parent) {};
-/** @type {!Array<string>} */
-NodeJS.Module.builtinModules;
-/** @type {function(new: (!NodeJS.Module), string, !NodeJS.Module=): ?} */
-NodeJS.Module.Module;
-/** @type {?} */
-NodeJS.Module.prototype.exports;
-/** @type {!NodeRequireFunction} */
-NodeJS.Module.prototype.require;
-/** @type {string} */
-NodeJS.Module.prototype.id;
-/** @type {string} */
-NodeJS.Module.prototype.filename;
-/** @type {boolean} */
-NodeJS.Module.prototype.loaded;
-/** @type {!NodeJS.Module} */
-NodeJS.Module.prototype.parent;
-/** @type {!Array<!NodeJS.Module>} */
-NodeJS.Module.prototype.children;
-/** @type {!Array<string>} */
-NodeJS.Module.prototype.paths;
-
-/**
- * @return {void}
- */
-NodeJS.Module.runMain = function() {};
-
-/**
- * @param {string} code
- * @return {string}
- */
-NodeJS.Module.wrap = function(code) {};
 /** @type {function(new: (!Buffer), string, string=): ?} */
 var GlobalBuffer;
