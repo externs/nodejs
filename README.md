@@ -224,12 +224,13 @@ Because `path` was previously defined in the output wrapper, all its properties 
 
 ### Global Conflict
 
-There are 3 modules that have the same name as some global variable: `module` and `console` and `buffer`. _Depack_ will require them using an underscore:
+There are 3 modules that have the same name as some global variable: `module` and `console` and `buffer`. The `crypto` extern [already exists](https://github.com/google/closure-compiler/blob/master/externs/browser/w3c_webcrypto.js#L552) in the _GCC_. Therefore, _Depack_ will require them using an underscore:
 
 ```js
 const _module = require('module')
 const _console = require('console')
 const _buffer = require('buffer')
+const _crypto_ = require('crypto')
 ```
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true"></a></p>
@@ -448,11 +449,14 @@ There are some missing APIs that appeared in Node 8 that are not present in type
 
 ### Crypto
 
+> The `crypto` externs [already exists](https://github.com/google/closure-compiler/blob/master/externs/browser/w3c_webcrypto.js#L552) in _GCC_, therefore the extern's namespace is added as `_crypto_.
+
 ```js
 types-v8/crypto.d.ts(10,14): warning TS0: type/symbol conflict for Certificate, using {?} for now
 ```
 
 - [ ] Fix the `Certificate` conflict.
+
 
 ### Dns
 

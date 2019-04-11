@@ -39,12 +39,13 @@ Because `path` was previously defined in the output wrapper, all its properties 
 
 ### Global Conflict
 
-There are 3 modules that have the same name as some global variable: `module` and `console` and `buffer`. _Depack_ will require them using an underscore:
+There are 3 modules that have the same name as some global variable: `module` and `console` and `buffer`. The `crypto` extern [already exists](https://github.com/google/closure-compiler/blob/master/externs/browser/w3c_webcrypto.js#L552) in the _GCC_. Therefore, _Depack_ will require them using an underscore:
 
 ```js
 const _module = require('module')
 const _console = require('console')
 const _buffer = require('buffer')
+const _crypto_ = require('crypto')
 ```
 
 %~%

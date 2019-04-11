@@ -1,11 +1,3 @@
-### Crypto
-
-```js
-types-v8/crypto.d.ts(10,14): warning TS0: type/symbol conflict for Certificate, using {?} for now
-```
-
-- [ ] Fix the `Certificate` conflict.
-
 ### Dns
 
 ```js
