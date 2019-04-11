@@ -1,3 +1,10 @@
+## 12 April 2019
+
+### [1.2.2](https://github.com/dpck/externs/compare/v1.2.1...v1.2.2)
+
+- [fix] Rename `crypto` to `_crypto` to avoid duplication of existing extern.
+- [wip] Doc the missing `crypto` properties.
+
 ## 10 April 2019
 
 ### [1.2.1](https://github.com/dpck/externs/compare/v1.2.0...v1.2.1)
