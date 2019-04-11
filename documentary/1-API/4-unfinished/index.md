@@ -59,42 +59,6 @@ node_modules/constants/index.js:216: WARNING - Property UV_FS_COPYFILE_EXCL neve
   UV_FS_COPYFILE_EXCL,
   ^^^^^^^^^^^^^^^^^^^
 
-node_modules/crypto/index.js:5: WARNING - Property Cipheriv never defined on webCrypto.Crypto
-  Cipheriv,
-  ^^^^^^^^
-
-node_modules/crypto/index.js:9: WARNING - Property Decipheriv never defined on webCrypto.Crypto
-  Decipheriv,
-  ^^^^^^^^^^
-
-node_modules/crypto/index.js:11: WARNING - Property DiffieHellmanGroup never defined on webCrypto.Crypto
-  DiffieHellmanGroup,
-  ^^^^^^^^^^^^^^^^^^
-
-node_modules/crypto/index.js:15: WARNING - Property Sign never defined on webCrypto.Crypto
-  Sign,
-  ^^^^
-
-node_modules/crypto/index.js:17: WARNING - Property constants never defined on webCrypto.Crypto
-  constants,
-  ^^^^^^^^^
-
-node_modules/crypto/index.js:24: WARNING - Property createDiffieHellmanGroup never defined on webCrypto.Crypto
-  createDiffieHellmanGroup,
-  ^^^^^^^^^^^^^^^^^^^^^^^^
-
-node_modules/crypto/index.js:38: WARNING - Property prng never defined on webCrypto.Crypto
-  prng,
-  ^^^^
-
-node_modules/crypto/index.js:45: WARNING - Property rng never defined on webCrypto.Crypto
-  rng,
-  ^^^
-
-node_modules/crypto/index.js:46: WARNING - Property setEngine never defined on webCrypto.Crypto
-  setEngine,
-  ^^^^^^^^^
-
 node_modules/domain/index.js:4: WARNING - Property active never defined on domain
   active,
   ^^^^^^
@@ -221,10 +185,6 @@ node_modules/repl/index.js:9: WARNING - Property writer never defined on repl
   writer,
   ^^^^^^
 
-node_modules/stream/index.js:9: WARNING - Property super_ never defined on stream
-  super_,
-  ^^^^^^
-
 node_modules/timers/index.js:3: WARNING - Property active never defined on timers
   active,
   ^^^^^^
@@ -265,7 +225,7 @@ node_modules/util/index.js:11: WARNING - Property getSystemErrorName never defin
   getSystemErrorName,
   ^^^^^^^^^^^^^^^^^^
 
-0 error(s), 66 warning(s), 96.0% typed
+0 error(s), 50 warning(s), 96.9% typed
 ```
 
 %~%

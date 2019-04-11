@@ -7,3 +7,15 @@ types-v8/crypto.d.ts(10,14): warning TS0: type/symbol conflict for Certificate, 
 ```
 
 - [ ] Fix the `Certificate` conflict.
+
+#### Missing Methods In Types
+
+- [ ] `Cipheriv`
+- [ ] `Decipheriv`
+- [ ] `DiffieHellmanGroup`
+- [ ] `Sign`
+- [ ] `constants`
+- [ ] `createDiffieHellmanGroup`
+- [ ] `prng`
+- [ ] `rng`
+- [ ] `setEngine`
