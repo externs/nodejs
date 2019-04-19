@@ -1,5 +1,9 @@
 ## 19 April 2019
 
+### [1.2.4](https://github.com/dpck/externs/compare/v1.2.3...v1.2.4)
+
+- [fix] Declare `DEPACK_EXPORT` as _var_.
+
 ### [1.2.3](https://github.com/dpck/externs/compare/v1.2.2...v1.2.3)
 
 - [add] Add the `Error.prepareStackTrace` definition.

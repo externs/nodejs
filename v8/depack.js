@@ -1,2 +1,2 @@
-/** @const */
+/** @var */
 var DEPACK_EXPORT
