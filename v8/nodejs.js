@@ -1061,3 +1061,10 @@ NodeJS.Timer.prototype.unref = function() {};
 
 /** @type {function(new: (!Buffer), string, string=): ?} */
 var GlobalBuffer;
+
+/**
+ * @param {Object} error
+ * @param {NodeJS.CallSite} structuredStackTrace
+ * @see https://v8.dev/docs/stack-trace-api#customizing-stack-traces
+ */
+Error.prepareStackTrace = function (error, structuredStackTrace) {}

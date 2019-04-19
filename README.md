@@ -332,6 +332,7 @@ types-v8/nodejs.d.ts(446,7): warning TS0: anonymous type has no symbol
     test/code.js:7: WARNING - Cannot do '[]' access on a struct
     const output = process.env['OUTPUT']
     ```
+- [x] [Add](v8/nodejs.js#1070) `Error.prepareStackTrace` to the Closure's _Error_ extern.
 
 ### Events
 
