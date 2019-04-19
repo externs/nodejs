@@ -1,3 +1,10 @@
+## 19 April 2019
+
+### [1.2.3](https://github.com/dpck/externs/compare/v1.2.2...v1.2.3)
+
+- [add] Add the `Error.prepareStackTrace` definition.
+- [depack] Add the `DEPACK_EXPORT` extern for compiling libraries.
+
 ## 12 April 2019
 
 ### [1.2.2](https://github.com/dpck/externs/compare/v1.2.1...v1.2.2)
