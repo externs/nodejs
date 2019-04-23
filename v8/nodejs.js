@@ -1059,8 +1059,8 @@ NodeJS.Timer.prototype.ref = function() {};
  */
 NodeJS.Timer.prototype.unref = function() {};
 
-/** @type {function(new: (!Buffer), string, string=): ?} */
-var GlobalBuffer;
+// /** @type {function(new: (!Buffer), string, string=): ?} */
+// var GlobalBuffer;
 
 /**
  * @param {Object} error
