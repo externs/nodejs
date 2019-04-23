@@ -108,3 +108,7 @@ The method is to use [`tsickle`](https://github.com/angular/tsickle) on the type
     }
     ```
     </details>
+
+The issue with splitting the declarations into separate files is that it is harder to merge upstream updates into it, and a lot of manual work has to be done. Therefore, ideally there would have to be patch scripts that would allow to update generated types, however at the moment externs are updated by hand when there are [warnings](#warnings-and-todos).
+
+%~%
