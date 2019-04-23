@@ -1,3 +1,9 @@
+## 23 April 2019
+
+### [1.3.0](https://github.com/dpck/externs/compare/v1.2.4...v1.3.0)
+
+- [externs] Move _Buffer_ to a separate file (`global/buffer.js`), complete _Buffer_ externs.
+
 ## 19 April 2019
 
 ### [1.2.4](https://github.com/dpck/externs/compare/v1.2.3...v1.2.4)
