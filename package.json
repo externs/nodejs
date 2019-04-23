@@ -79,11 +79,11 @@
   "homepage": "https://github.com/dpck/externs#readme",
   "devDependencies": {
     "alamode": "^1.9.3",
-    "documentary": "^1.24.1",
+    "documentary": "^1.25.0",
     "eslint-config-artdeco": "1.0.1",
     "tsickle": "0.34.3",
-    "typescript": "3.4.4",
+    "typescript": "3.4.5",
     "yarn-s": "1.1.0",
-    "zoroaster": "^3.11.6"
+    "zoroaster": "^3.12.0"
   }
 }
