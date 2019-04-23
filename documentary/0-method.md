@@ -4,7 +4,14 @@ The method is to use [`tsickle`](https://github.com/angular/tsickle) on the type
 
 1. The definitions are split into individual files, making it easier to track warnings and maintain the manual changes that have to be made for each extern.
 1. When trying to generate from the single file, there's a conflict between `var Buffer` and `interface Buffer`, which TypeScript is fine with, but `tsickle` fails to process properly. Therefore, the `var Buffer` is renamed into `var GlobalBuffer` in the [Node.JS API types](types-v8/nodejs.d.ts#525) and is [referenced](types-v8/nodejs.d.ts#433) as `export interface Global { Buffer: typeof GlobalBuffer; }` which is then [used](types-v8/global.d.ts#69) in the `global.d.ts`: `declare var global: NodeJS.Global;`.
-1. *TODO* Because the `Buffer` interface (not the global var) is [defined](types-v8/global.d.ts#184) in the `global.d.ts` as `interface Buffer extends NodeBuffer { }`, it is what the externs will recognise as the global _Buffer_, rather than `global.Buffer`. This possibly needs to be fixed by removing `interface Buffer extends NodeBuffer { }` from `global.d.ts` and making all other modules reference it by the name of `NodeBuffer` to indicate the type.
+1. *Because the `Buffer` interface (not the global var) is [defined](types-v8/global.d.ts#184) in the `global.d.ts` as `interface Buffer extends NodeBuffer { }`, the externs would generate a `NodeBuffer` type. The `Buffer` extern has been [manually updated](v8/global/buffer.js) to merge `var Buffer` and `interface Buffer`. There are also tests to make sure there are no warnings.
+    <details>
+    <summary>
+    Show _Buffer_ tests (`depack test/spec/buffer.js -a --checks_only --externs v8/global/buffer.js --externs v8/global.js` shows no warnings)
+    </summary>
+
+    %EXAMPLE: test/spec/buffer.js%
+    </details>
 1. Because of [warnings](#warnings-and-todos) and cases that `tsickle` can't handle, some externs need manual update by looking at the error messages and also manual inspection of generated code.
 1. The globals are only defined as the `global` object in **`global.d.ts`**: `declare var global: NodeJS.Global;`. Not sure whether properties of [`NodeJS.Global`](/types-v8/nodejs.js#429) other than Buffer should be expanded into the global context, because _Closure_ will probably handle them already since they're generic JS.
     <details>

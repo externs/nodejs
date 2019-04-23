@@ -13,7 +13,7 @@ yarn add -E @depack/externs
 - [Table Of Contents](#table-of-contents)
 - [Method](#method)
 - [API](#api)
-- [`getExternsDir(): string`](#getexternsdir-string)
+  * [`getExternsDir(): string`](#getexternsdir-string)
 - [How To Use](#how-to-use)
   * [Global Conflict](#global-conflict)
 - [Warnings And Todos](#warnings-and-todos)
@@ -53,7 +53,73 @@ The method is to use [`tsickle`](https://github.com/angular/tsickle) on the type
 
 1. The definitions are split into individual files, making it easier to track warnings and maintain the manual changes that have to be made for each extern.
 1. When trying to generate from the single file, there's a conflict between `var Buffer` and `interface Buffer`, which TypeScript is fine with, but `tsickle` fails to process properly. Therefore, the `var Buffer` is renamed into `var GlobalBuffer` in the [Node.JS API types](types-v8/nodejs.d.ts#525) and is [referenced](types-v8/nodejs.d.ts#433) as `export interface Global { Buffer: typeof GlobalBuffer; }` which is then [used](types-v8/global.d.ts#69) in the `global.d.ts`: `declare var global: NodeJS.Global;`.
-1. *TODO* Because the `Buffer` interface (not the global var) is [defined](types-v8/global.d.ts#184) in the `global.d.ts` as `interface Buffer extends NodeBuffer { }`, it is what the externs will recognise as the global _Buffer_, rather than `global.Buffer`. This possibly needs to be fixed by removing `interface Buffer extends NodeBuffer { }` from `global.d.ts` and making all other modules reference it by the name of `NodeBuffer` to indicate the type.
+1. *Because the `Buffer` interface (not the global var) is [defined](types-v8/global.d.ts#184) in the `global.d.ts` as `interface Buffer extends NodeBuffer { }`, the externs would generate a `NodeBuffer` type. The `Buffer` extern has been [manually updated](v8/global/buffer.js) to merge `var Buffer` and `interface Buffer`. There are also tests to make sure there are no warnings.
+    <details>
+    <summary>
+    Show _Buffer_ tests (`depack test/spec/buffer.js -a --checks_only --externs v8/global/buffer.js --externs v8/global.js` shows no warnings)
+    </summary>
+
+    ```js
+    const ab = new ArrayBuffer(16)
+    const data = ['hello', 'world']
+    const string = 'hello world'
+    
+    /** @type {!Buffer} */
+    var b
+    b = new Buffer(string)
+    b = new Buffer(string, 'utf8')
+    b = new Buffer(100)
+    b = new Buffer(new Uint8Array(100))
+    b = new Buffer(ab)
+    b = new Buffer(data)
+    b = new Buffer(b)
+    
+    b = Buffer.from(ab)
+    b = Buffer.from(ab, 10)
+    b = Buffer.from(ab, 10, 20)
+    
+    b = Buffer.from(data)
+    b = Buffer.from(string)
+    b = Buffer.from(b)
+    b = Buffer.from(ab)
+    
+    b = Buffer.from(string, 'utf8')
+    
+    /** @type {boolean} */
+    var ib = Buffer.isBuffer(string)
+    ib = Buffer.isBuffer(b)
+    
+    /** @type {boolean} */
+    var ie = Buffer.isEncoding('utf8')
+    ie = Buffer.isEncoding('sirocco5')
+    
+    /** @type {number} */
+    var bl = Buffer.byteLength(string)
+    bl = Buffer.byteLength(b)
+    bl = Buffer.byteLength(new DataView(ab))
+    bl = Buffer.byteLength(ab)
+    bl = Buffer.byteLength(string, 'utf8')
+    
+    b = Buffer.concat([b, b])
+    b = Buffer.concat([b, b], 10)
+    
+    /** @type {number} */
+    var n = Buffer.compare(b, b)
+    
+    b = Buffer.alloc(10)
+    b = Buffer.alloc(10, string)
+    b = Buffer.alloc(10, b)
+    b = Buffer.alloc(10, 10)
+    b = Buffer.alloc(10, string, 'utf8')
+    
+    b = Buffer.allocUnsafe(10)
+    
+    b = Buffer.allocUnsafeSlow(10)
+    
+    /** @type {number} */
+    var ps = Buffer.poolSize
+    ```
+    </details>
 1. Because of [warnings](#warnings-and-todos) and cases that `tsickle` can't handle, some externs need manual update by looking at the error messages and also manual inspection of generated code.
 1. The globals are only defined as the `global` object in **`global.d.ts`**: `declare var global: NodeJS.Global;`. Not sure whether properties of [`NodeJS.Global`](/types-v8/nodejs.js#429) other than Buffer should be expanded into the global context, because _Closure_ will probably handle them already since they're generic JS.
     <details>
@@ -178,7 +244,7 @@ Dependencies:
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true" width="25"></a></p>
 
-## `getExternsDir(): string`
+### `getExternsDir(): string`
 
 Runs `require.resolve('@depack/externs/package.json')` to find the location of this package, and adds the `v8` at the end to point to the externs version 8 (currently only Node 8 is supported).
 

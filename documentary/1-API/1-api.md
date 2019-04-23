@@ -11,7 +11,7 @@ The externs for each of the modules are found in the published `v8` directory. T
 
 %~ width="25"%
 
-```## getExternsDir => string
+```### getExternsDir => string
 ```
 
 Runs `require.resolve('@depack/externs/package.json')` to find the location of this package, and adds the `v8` at the end to point to the externs version 8 (currently only Node 8 is supported).
