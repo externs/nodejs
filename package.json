@@ -11,7 +11,7 @@
     "mask": "yarn t test/mask",
     "test-build": "ALAMODE_ENV=test-build yarn test",
     "lint": "eslint .",
-    "doc": "NODE_DEBUG=doc doc documentary -o README.md",
+    "doc": "NODE_DEBUG=doc doc -o README.md",
     "b": "alamode src -o build -s",
     "d": "yarn-s d1",
     "d1": "NODE_DEBUG=doc doc src/index.js -g",
@@ -79,12 +79,12 @@
   },
   "homepage": "https://github.com/dpck/externs#readme",
   "devDependencies": {
-    "alamode": "^1.9.3",
-    "documentary": "^1.25.0",
+    "alamode": "^2.0.0",
+    "documentary": "^1.26.0",
     "eslint-config-artdeco": "1.0.1",
     "tsickle": "0.34.3",
     "typescript": "3.4.5",
     "yarn-s": "1.1.0",
-    "zoroaster": "^3.12.0"
+    "zoroaster": "^3.13.0"
   }
 }
