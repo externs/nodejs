@@ -256,11 +256,12 @@ SymbolConstructor.prototype.iterator;
  * @struct
  */
 function IterableIterator() {}
+
 /**
- * @record
- * @struct
+ * @param {string} id
+ * @returns {?}
  */
-function NodeRequireFunction() {}
+function NodeRequireFunction(id) {}
 
 /* TODO: CallSignature:  */
 /**
@@ -306,10 +307,11 @@ function NodeExtensions() {}
 /** @type {!NodeRequire} */
 var require;
 /**
- * @record
- * @struct
+ * @constructor
+ * @param {string} id
+ * @param {!NodeModule=} parent
  */
-function NodeModule() {}
+function NodeModule(id, parent) {}
 /** @type {?} */
 NodeModule.prototype.exports;
 /** @type {!NodeRequireFunction} */
@@ -326,24 +328,9 @@ NodeModule.prototype.parent;
 NodeModule.prototype.children;
 /** @type {!Array<string>} */
 NodeModule.prototype.paths;
-/** @type {!NodeRequire} */
-var require;
-/** @type {?} */
-NodeModule.prototype.exports;
-/** @type {!NodeRequireFunction} */
-NodeModule.prototype.require;
-/** @type {string} */
-NodeModule.prototype.id;
-/** @type {string} */
-NodeModule.prototype.filename;
-/** @type {boolean} */
-NodeModule.prototype.loaded;
+
 /** @type {!NodeModule} */
-NodeModule.prototype.parent;
-/** @type {!Array<!NodeModule>} */
-NodeModule.prototype.children;
-/** @type {!Array<string>} */
-NodeModule.prototype.paths;
+var module;
 
 /** @typedef {string} */
 var BufferEncoding;

@@ -9,3 +9,5 @@ const paths = require.resolve.paths('depack')
 
 /** @type {!NodeModule} */
 const main = require.main
+
+const b = module.require('http')

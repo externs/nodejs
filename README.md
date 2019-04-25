@@ -15,7 +15,7 @@ yarn add -E @depack/externs
 - [API](#api)
   * [`getExternsDir(): string`](#getexternsdir-string)
 - [How To Use](#how-to-use)
-  * [Global Conflict](#global-conflict)
+  * [Clashes](#clashes)
 - [Warnings And Todos](#warnings-and-todos)
   * [Export = internal](#export--internal)
   * [Global](#global)
@@ -273,43 +273,46 @@ import { join } from 'path'
 const path = require('path')
 ```
 
-Because path is now a globally declared variable that is placed in the wrapper, it will also participate in optimisations, and by supplying the externs from the relevant externs file, the compiler will successfully be able to perform correct property renames, leaving property names of that module alone.
-
-The important thing about how compiling Node.JS packages works in _Depack_, is the strategy when the pseudo built-in module is generated in `node_modules`. For example, for the `path` internal, the following code will be produced in `node_modules/path/index.js`:
+The important thing about how compiling _Node.JS_ packages works in _Depack_, is the strategy when a pseudo built-in module is placed in `node_modules`. For example, for the `path` internal, the following code will be produced in `node_modules/path/index.js`:
 
 ```js
 export default path
 export const {
-  'basename': basename,
-  'delimiter': delimiter,
-  'dirname': dirname,
-  'extname': extname,
-  'format': format,
-  'isAbsolute': isAbsolute,
-  'join': join,
-  'normalize': normalize,
-  'parse': parse,
-  'posix': posix,
-  'relative': relative,
-  'resolve': resolve,
-  'sep': sep,
-  'win32': win32,
+  basename,
+  delimiter,
+  dirname,
+  extname,
+  format,
+  isAbsolute,
+  join,
+  normalize,
+  parse,
+  posix,
+  relative,
+  resolve,
+  sep,
+  win32,
 } = path
 ```
 
-Because `path` was previously defined in the output wrapper, all its properties will be destructured and exported correctly.
+Because `path` was previously defined in the output wrapper and an extern was added, all its properties will be destructured and exported correctly.
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true" width="25"></a></p>
 
-### Global Conflict
+### Clashes
+
+> This might need some rethinking...
 
 There are 3 modules that have the same name as some global variable: `module` and `console` and `buffer`. The `crypto` extern [already exists](https://github.com/google/closure-compiler/blob/master/externs/browser/w3c_webcrypto.js#L552) in the _GCC_. Therefore, _Depack_ will require them using an underscore:
 
 ```js
+// module !== require('module') so this is good
 const _module = require('module')
+// console === require('console') so we might change that later
 const _console = require('console')
+// buffer === require('buffer') so we might change that later
 const _buffer = require('buffer')
-const _crypto_ = require('crypto')
+const _crypto = require('crypto')
 ```
 
 <p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true"></a></p>
@@ -416,10 +419,10 @@ types-v8/global.d.ts(188,1): warning TS0: omitting heritage reference to a type/
 
     ```ts
     /**
-     * @record
-     * @struct
+     * @param {string} id
+     * @returns {?}
      */
-    function NodeRequireFunction() {}
+    function NodeRequireFunction(id) {}
 
     /* TODO: CallSignature:  */
     /**
@@ -438,7 +441,7 @@ types-v8/global.d.ts(188,1): warning TS0: omitting heritage reference to a type/
     ```
     </td></tr>
     </table>
-
+- [x] The [`NodeModule.prototype.require`](v8/global.js) should not reference _NodeRequire_ instead of _NodeRequireFunction_ because _NodeRequire_ is just a function without additional properties such as `.cache` _etc_. However, _NodeRequireFunction_ still needs to be changed to a function from `@struct`.
 
 ### Node.JS
 

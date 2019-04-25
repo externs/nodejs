@@ -13,24 +13,11 @@
 var _module = function(id, parent) {};
 /** @type {!Array<string>} */
 _module.builtinModules;
-/** @type {function(new: (!_module), string, !_module=): ?} */
+/**
+ * Provides general utility methods when interacting with instances of Module — the module variable often seen in file modules. Accessed via require('module').
+ * @type {typeof _module}
+ */
 _module.Module;
-/** @type {?} */
-_module.prototype.exports;
-/** @type {!NodeRequireFunction} */
-_module.prototype.require;
-/** @type {string} */
-_module.prototype.id;
-/** @type {string} */
-_module.prototype.filename;
-/** @type {boolean} */
-_module.prototype.loaded;
-/** @type {!_module} */
-_module.prototype.parent;
-/** @type {!Array<!_module>} */
-_module.prototype.children;
-/** @type {!Array<string>} */
-_module.prototype.paths;
 
 /**
  * @return {void}
