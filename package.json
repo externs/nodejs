@@ -19,6 +19,7 @@
     "ts": "alanode tsconfig",
     "e": "alanode",
     "test-buffer": "depack-dev test/spec/buffer.js -a --checks_only --externs v8/global/buffer.js --externs v8/global.js",
+    "test-require": "depack-dev test/spec/require.js -a --checks_only --externs v8/global.js",
     "os": "tsickle --externs=v8/os.js",
     "querystring": "tsickle --externs=v8/querystring.js",
     "url": "tsickle --externs=v8/url.js",

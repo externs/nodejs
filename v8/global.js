@@ -264,11 +264,10 @@ function NodeRequireFunction() {}
 
 /* TODO: CallSignature:  */
 /**
- * @extends {NodeRequireFunction}
- * @record
- * @struct
+ * @param {string} id
+ * @returns {*}
  */
-function NodeRequire() {}
+function NodeRequire(id) {}
 /** @type {!RequireResolve} */
 NodeRequire.prototype.resolve;
 /** @type {?} */
@@ -278,10 +277,11 @@ NodeRequire.prototype.extensions;
 /** @type {!NodeModule} */
 NodeRequire.prototype.main;
 /**
- * @record
- * @struct
+ * @param {string} request
+ * @param {{paths:!Array<string>}} options
+ * @return {string}
  */
-function RequireResolve() {}
+function RequireResolve(request, options) {}
 
 /* TODO: CallSignature:  */
 
