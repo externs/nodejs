@@ -1,3 +1,11 @@
+## 25 April 2019
+
+### [1.4.0](https://github.com/dpck/externs/compare/v1.3.0...v1.4.0)
+
+- [externs] Tidy up `_module` and `module`, make `require` and `require.resolve` callable.
+- [doc] Clearer how-to.
+- [test] Tests for `require` and `module`.
+
 ## 23 April 2019
 
 ### [1.3.0](https://github.com/dpck/externs/compare/v1.2.4...v1.3.0)
