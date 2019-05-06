@@ -1,3 +1,9 @@
+## 6 May 2019
+
+### [1.4.1](https://github.com/dpck/externs/compare/v1.4.0...v1.4.1)
+
+- [fix] Rename `crypto` to `_crypto`.
+
 ## 25 April 2019
 
 ### [1.4.0](https://github.com/dpck/externs/compare/v1.3.0...v1.4.0)
