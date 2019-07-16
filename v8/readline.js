@@ -204,3 +204,8 @@ readline.clearLine = function(stream, dir) {};
  * @return {void}
  */
 readline.clearScreenDown = function(stream) {};
+
+/**
+ * @constructor
+ */
+readline.Interface = function() {};
