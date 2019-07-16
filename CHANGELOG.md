@@ -1,5 +1,9 @@
 ## 16 July 2019
 
+### [1.4.3](https://github.com/dpck/externs/compare/v1.4.2...v1.4.3)
+
+- [feature] Add the `readline.Interface` constructor to externs.
+
 ### [1.4.2](https://github.com/dpck/externs/compare/v1.4.1...v1.4.2)
 
 - [feature] Add the `util.getSystemErrorName` method to externs.
