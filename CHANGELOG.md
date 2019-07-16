@@ -1,3 +1,9 @@
+## 16 July 2019
+
+### [1.4.2](https://github.com/dpck/externs/compare/v1.4.1...v1.4.2)
+
+- [feature] Add the `util.getSystemErrorName` method to externs.
+
 ## 6 May 2019
 
 ### [1.4.1](https://github.com/dpck/externs/compare/v1.4.0...v1.4.1)
