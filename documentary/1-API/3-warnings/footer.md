@@ -204,4 +204,14 @@ types-v8/readline.d.ts(17,3): warning TS0: omitting interface deriving from clas
 types-v8/repl.d.ts(65,3): warning TS0: omitting heritage reference to a type/value conflict: SyntaxError
 ```
 
+### util
+
+```ts
+node_modules/util/index.js:11: WARNING - Property getSystemErrorName never defined on util
+  getSystemErrorName,
+  ^^^^^^^^^^^^^^^^^^
+```
+
+-[x] Adding to `util.getSystemErrorName` to externs manually.
+
 %~%

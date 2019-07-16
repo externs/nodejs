@@ -42,10 +42,11 @@ yarn add -E @depack/externs
   * [Punycode](#punycode)
   * [Readline](#readline)
   * [Repl](#repl)
+  * [util](#util)
 - [WIP](#wip)
 - [Copyright](#copyright)
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/0.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/0.svg?sanitize=true"></a></p>
 
 ## Method
 
@@ -214,7 +215,7 @@ The method is to use [`tsickle`](https://github.com/angular/tsickle) on the type
 
 The issue with splitting the declarations into separate files is that it is harder to merge upstream updates into it, and a lot of manual work has to be done. Therefore, ideally there would have to be patch scripts that would allow to update generated types, however at the moment externs are updated by hand when there are [warnings](#warnings-and-todos).
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/1.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/1.svg?sanitize=true"></a></p>
 
 ## API
 
@@ -254,13 +255,13 @@ Dependencies:
   tty: [ 'net' ] }
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/2.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/2.svg?sanitize=true" width="25"></a></p>
 
 ### `getExternsDir(): string`
 
 Runs `require.resolve('@depack/externs/package.json')` to find the location of this package, and adds the `v8` at the end to point to the externs version 8 (currently only Node 8 is supported).
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/3.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/3.svg?sanitize=true"></a></p>
 
 ## How To Use
 
@@ -297,7 +298,7 @@ export const {
 
 Because `path` was previously defined in the output wrapper and an extern was added, all its properties will be destructured and exported correctly.
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/4.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/4.svg?sanitize=true" width="25"></a></p>
 
 ### Clashes
 
@@ -315,7 +316,7 @@ const _buffer = require('buffer')
 const _crypto = require('crypto')
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/5.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/5.svg?sanitize=true"></a></p>
 
 ## Warnings And Todos
 
@@ -343,7 +344,7 @@ There were warnings that were emitted during the generation of each extern. Thos
 > *omitting interface deriving from class*
 > For some reason, the class will not always be able to extend another class. E.g., the `@extends {event.EventEmitter}` has to be added manually in many files that rely on it.
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/6.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/6.svg?sanitize=true" width="25"></a></p>
 
 ### Export = internal
 
@@ -376,7 +377,7 @@ events.internal.EventEmitter.prototype.listenerCount = function(type) {};
 
 This is obviously incorrect, so that `.internal` needs to be removed manually.
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/7.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/7.svg?sanitize=true" width="25"></a></p>
 
 
 ### Global
@@ -813,7 +814,17 @@ types-v8/readline.d.ts(17,3): warning TS0: omitting interface deriving from clas
 types-v8/repl.d.ts(65,3): warning TS0: omitting heritage reference to a type/value conflict: SyntaxError
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/8.svg?sanitize=true"></a></p>
+### util
+
+```ts
+node_modules/util/index.js:11: WARNING - Property getSystemErrorName never defined on util
+  getSystemErrorName,
+  ^^^^^^^^^^^^^^^^^^
+```
+
+-[x] Adding to `util.getSystemErrorName` to externs manually.
+
+<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/8.svg?sanitize=true"></a></p>
 
 ## WIP
 
@@ -1038,14 +1049,10 @@ node_modules/url/index.js:11: WARNING - Property resolveObject never defined on 
   resolveObject,
   ^^^^^^^^^^^^^
 
-node_modules/util/index.js:11: WARNING - Property getSystemErrorName never defined on util
-  getSystemErrorName,
-  ^^^^^^^^^^^^^^^^^^
-
 0 error(s), 50 warning(s), 96.9% typed
 ```
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/9.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/9.svg?sanitize=true"></a></p>
 
 ## Copyright
 
@@ -1083,18 +1090,18 @@ Taken from https://github.com/DefinitelyTyped/DefinitelyTyped
   <tr>
     <th>
       <a href="https://artd.eco">
-        <img src="https://raw.githubusercontent.com/wrote/wrote/master/images/artdeco.png" alt="Art Deco" />
+        <img src="https://raw.githubusercontent.com/wrote/wrote/master/images/artdeco.png" alt="Art Deco">
       </a>
     </th>
     <th>© <a href="https://artd.eco">Art Deco</a> for <a href="https://artd.eco/depack">Depack</a> 2019</th>
     <th>
       <a href="https://www.technation.sucks" title="Tech Nation Visa">
         <img src="https://raw.githubusercontent.com/artdecoweb/www.technation.sucks/master/anim.gif"
-          alt="Tech Nation Visa" />
+          alt="Tech Nation Visa">
       </a>
     </th>
     <th><a href="https://www.technation.sucks">Tech Nation Visa Sucks</a></th>
   </tr>
 </table>
 
-<p align="center"><a href="#table-of-contents"><img src=".documentary/section-breaks/-1.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/-1.svg?sanitize=true"></a></p>
