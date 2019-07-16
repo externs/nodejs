@@ -222,3 +222,9 @@ util.TextEncoder.prototype.encoding;
  * @return {!Uint8Array}
  */
 util.TextEncoder.prototype.encode = function(input) {};
+
+/**
+ * @param {number} err
+ * @return {string}
+ */
+util.getSystemErrorName = function(err) {};
