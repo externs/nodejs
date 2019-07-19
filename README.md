@@ -43,6 +43,8 @@ yarn add -E @depack/externs
   * [Readline](#readline)
   * [Repl](#repl)
   * [util](#util)
+  * [querystring](#querystring)
+  * [net](#net)
 - [WIP](#wip)
 - [Copyright](#copyright)
 
@@ -823,6 +825,14 @@ node_modules/util/index.js:11: WARNING - Property getSystemErrorName never defin
 ```
 
 -[x] Adding to `util.getSystemErrorName` to externs manually.
+
+### querystring
+
+-[x] Add `decode` and `encode` aliases to `parse` and `stringify`.
+
+### net
+
+-[x] Add the `Stream` alias to `Socket`.
 
 <p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/8.svg?sanitize=true"></a></p>
 

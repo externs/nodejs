@@ -62,3 +62,8 @@ querystring.escape = function(str) {};
  * @return {string}
  */
 querystring.unescape = function(str) {};
+
+/** @type {querystring.parse} */
+querystring.decode
+/** @type {querystring.stringify} */
+querystring.encode

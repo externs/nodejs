@@ -429,3 +429,6 @@ net.isIPv4 = function(input) {};
  * @return {boolean}
  */
 net.isIPv6 = function(input) {};
+
+/** @type {net.Socket} */
+net.Stream

@@ -476,3 +476,9 @@ http.request = function(options, callback) {};
 http.get = function(options, callback) {};
 /** @type {!http.Agent} */
 http.globalAgent;
+
+/**
+ * @type {number}
+ * https://nodejs.org/api/http.html#http_http_maxheadersize
+ */
+http.maxHeaderSize
