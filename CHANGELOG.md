@@ -1,3 +1,9 @@
+## 19 July 2019
+
+### [1.4.4](https://github.com/dpck/externs/compare/v1.4.3...v1.4.4)
+
+- [externs] Include types for `querystring`: _encode/decode_, `http`: _maxHeaderSize_, `net`: _Stream_. Update wip.
+
 ## 16 July 2019
 
 ### [1.4.3](https://github.com/dpck/externs/compare/v1.4.2...v1.4.3)
