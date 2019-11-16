@@ -1,3 +1,10 @@
+## 16 November 2019
+
+### [1.5.0](https://github.com/dpck/externs/compare/v1.4.4...v1.5.0)
+
+- [package] Rename to `@externs/nodejs`.
+- [ops] Publish `build` folder.
+
 ## 19 July 2019
 
 ### [1.4.4](https://github.com/dpck/externs/compare/v1.4.3...v1.4.4)

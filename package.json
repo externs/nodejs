@@ -58,7 +58,8 @@
   },
   "files": [
     "v8",
-    "src"
+    "src",
+    "build"
   ],
   "repository": {
     "type": "git",

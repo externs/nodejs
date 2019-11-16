@@ -23,7 +23,7 @@ export const dependencies = {
 }
 
 /**
- * Returns the path to the `v8` externs by calling the `require.resolve` to get the pack to the `@externs/nodejs` package.
+ * Returns the path to the `v8` externs by calling the `require.resolve` to get the pack to the `＠externs/nodejs` package.
  */
 const getExternsDir = () => {
   const externs = relative('',
