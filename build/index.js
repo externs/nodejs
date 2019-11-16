@@ -2,7 +2,7 @@ const { relative, dirname, join } = require('path');
 /**
  * If an extern depends on others, it will be present in this list.
  */
-       const dependencies = {
+const dependencies = {
   url: ['querystring'],
   stream: ['events'],
   net: ['stream', 'events', 'dns'],
@@ -23,11 +23,11 @@ const { relative, dirname, join } = require('path');
 }
 
 /**
- * Returns the path to the `v8` externs by calling the `require.resolve` to get the pack to the `@depack/externs` package.
+ * Returns the path to the `v8` externs by calling the `require.resolve` to get the pack to the `@externs/nodejs` package.
  */
 const getExternsDir = () => {
   const externs = relative('',
-    dirname(require.resolve('@depack/externs/package.json')))
+    dirname(require.resolve('@externs/nodejs/package.json')))
   const externsDir = join(externs, 'v8')
   return externsDir
 }

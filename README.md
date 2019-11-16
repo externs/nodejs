@@ -1,11 +1,11 @@
-# @depack/externs
+# @externs/nodejs
 
-[![npm version](https://badge.fury.io/js/%40depack%2Fexterns.svg)](https://npmjs.org/package/@depack/externs)
+[![npm version](https://badge.fury.io/js/%40externs%2Fnodejs.svg)](https://www.npmjs.com/package/@externs/nodejs)
 
-`@depack/externs` is The Google Closure Compiler Externs For Node.JS.
+`@externs/nodejs` is The Google Closure Compiler Externs For Node.JS.
 
 ```sh
-yarn add -E @depack/externs
+yarn add -E @externs/nodejs
 ```
 
 ## Table Of Contents
@@ -48,7 +48,9 @@ yarn add -E @depack/externs
 - [WIP](#wip)
 - [Copyright](#copyright)
 
-<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/0.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/0.svg?sanitize=true">
+</a></p>
 
 ## Method
 
@@ -217,12 +219,14 @@ The method is to use [`tsickle`](https://github.com/angular/tsickle) on the type
 
 The issue with splitting the declarations into separate files is that it is harder to merge upstream updates into it, and a lot of manual work has to be done. Therefore, ideally there would have to be patch scripts that would allow to update generated types, however at the moment externs are updated by hand when there are [warnings](#warnings-and-todos).
 
-<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/1.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/1.svg?sanitize=true">
+</a></p>
 
 ## API
 
 ```js
-import getExternsDir, { dependencies } from '@depack/externs'
+import getExternsDir, { dependencies } from '@externs/nodejs'
 ```
 
 The externs for each of the modules are found in the published `v8` directory. The `global` and `nodejs` externs always need to be present when compiling a _Node.JS_ program (unless its in pure JS). Externs might depend on other externs, and the dependency tree is exported by this package:
@@ -257,13 +261,17 @@ Dependencies:
   tty: [ 'net' ] }
 ```
 
-<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/2.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/2.svg?sanitize=true" width="25">
+</a></p>
 
-### `getExternsDir(): string`
+### <code><ins>getExternsDir</ins>(): <i>string</i></code>
 
-Runs `require.resolve('@depack/externs/package.json')` to find the location of this package, and adds the `v8` at the end to point to the externs version 8 (currently only Node 8 is supported).
+Runs `require.resolve('@externs/nodejs/package.json')` to find the location of this package, and adds the `v8` at the end to point to the externs version 8 (currently only Node 8 is supported).
 
-<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/3.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/3.svg?sanitize=true">
+</a></p>
 
 ## How To Use
 
@@ -300,7 +308,9 @@ export const {
 
 Because `path` was previously defined in the output wrapper and an extern was added, all its properties will be destructured and exported correctly.
 
-<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/4.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/4.svg?sanitize=true" width="25">
+</a></p>
 
 ### Clashes
 
@@ -318,7 +328,9 @@ const _buffer = require('buffer')
 const _crypto = require('crypto')
 ```
 
-<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/5.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/5.svg?sanitize=true">
+</a></p>
 
 ## Warnings And Todos
 
@@ -346,7 +358,9 @@ There were warnings that were emitted during the generation of each extern. Thos
 > *omitting interface deriving from class*
 > For some reason, the class will not always be able to extend another class. E.g., the `@extends {event.EventEmitter}` has to be added manually in many files that rely on it.
 
-<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/6.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/6.svg?sanitize=true" width="25">
+</a></p>
 
 ### Export = internal
 
@@ -379,7 +393,9 @@ events.internal.EventEmitter.prototype.listenerCount = function(type) {};
 
 This is obviously incorrect, so that `.internal` needs to be removed manually.
 
-<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/7.svg?sanitize=true" width="25"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/7.svg?sanitize=true" width="25">
+</a></p>
 
 
 ### Global
@@ -805,7 +821,7 @@ types-v8/readline.d.ts(17,3): warning TS0: omitting interface deriving from clas
 
 - [x] [Rename](v8/readline.js#185) `interface` argument to `_interface`, otherwise the following error is shown:
     ```js
-    @depack/externs/v8/readline.js:185: ERROR - Parse error. ')' expected
+    @externs/nodejs/v8/readline.js:185: ERROR - Parse error. ')' expected
     readline.emitKeypressEvents = function(stream, interface) {};
                                                   ^
     ```
@@ -835,7 +851,9 @@ node_modules/util/index.js:11: WARNING - Property getSystemErrorName never defin
 
 -[x] Add the `Stream` alias to `Socket` (currently the type is incorrect, i.e., `/** @type {net.Socket} */ net.Stream`. This assigned the instance type rather than constructor type.
 
-<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/8.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/8.svg?sanitize=true">
+</a></p>
 
 ## WIP
 
@@ -1019,7 +1037,9 @@ node_modules/tls/index.js:19: WARNING - [JSC_INEXISTENT_PROPERTY] Property parse
 0 error(s), 38 warning(s), 97.5% typed
 ```
 
-<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/9.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/9.svg?sanitize=true">
+</a></p>
 
 ## Copyright
 
@@ -1057,13 +1077,14 @@ Taken from https://github.com/DefinitelyTyped/DefinitelyTyped
   <tr>
     <th>
       <a href="https://artd.eco">
-        <img src="https://raw.githubusercontent.com/wrote/wrote/master/images/artdeco.png" alt="Art Deco">
+        <img width="100" src="https://raw.githubusercontent.com/wrote/wrote/master/images/artdeco.png"
+          alt="Art Deco">
       </a>
     </th>
     <th>© <a href="https://artd.eco">Art Deco</a> for <a href="https://artd.eco/depack">Depack</a> 2019</th>
     <th>
       <a href="https://www.technation.sucks" title="Tech Nation Visa">
-        <img src="https://raw.githubusercontent.com/artdecoweb/www.technation.sucks/master/anim.gif"
+        <img width="100" src="https://raw.githubusercontent.com/idiocc/cookies/master/wiki/arch4.jpg"
           alt="Tech Nation Visa">
       </a>
     </th>
@@ -1071,4 +1092,6 @@ Taken from https://github.com/DefinitelyTyped/DefinitelyTyped
   </tr>
 </table>
 
-<p align="center"><a href="#table-of-contents"><img src="/.documentary/section-breaks/-1.svg?sanitize=true"></a></p>
+<p align="center"><a href="#table-of-contents">
+  <img src="/.documentary/section-breaks/-1.svg?sanitize=true">
+</a></p>

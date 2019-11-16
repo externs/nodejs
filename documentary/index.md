@@ -1,11 +1,11 @@
-# @depack/externs
+# @externs/nodejs
 
-%NPM: @depack/externs%
+%NPM: @externs/nodejs%
 
-`@depack/externs` is The Google Closure Compiler Externs For Node.JS.
+`@externs/nodejs` is The Google Closure Compiler Externs For Node.JS.
 
 ```sh
-yarn add -E @depack/externs
+yarn add -E @externs/nodejs
 ```
 
 ## Table Of Contents
